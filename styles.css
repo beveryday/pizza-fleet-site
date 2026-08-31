@@ -96,17 +96,13 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
   .shell{width:min(100% - 24px,1180px)}.nav>.button{display:none}.nav{grid-template-columns:1fr}.hero{min-height:auto;padding-block:55px}.hero-art{min-height:380px}.hero-art img{width:115%}.status-card{transform:scale(.85)}.status-one{left:0}.status-two{right:-5%;top:10%}h1{font-size:58px}.lede{font-size:17px}.section{padding-block:90px}.split{gap:25px}.section-copy{padding-top:0;font-size:18px}.loop{grid-template-columns:1fr}.loop-card{border-right:0;border-bottom:1px solid var(--line)!important}.loop-card:last-child{border-bottom:0!important}.world{height:430px}.tile{transform:scale(.78)}.tile-a{left:0}.tile-b{left:28%}.tile-c{right:-4%}.tile-d{right:3%}.mission-card{width:230px}.integration-grid{grid-template-columns:1fr}.integration-grid div{border-right:0!important;border-bottom:1px solid var(--line)!important}.integration-grid div:last-child{border-bottom:0!important}.cta{padding:38px 24px}.signup{grid-template-columns:1fr}.footer{margin-top:40px}
 }
 
-/* --- one control / many ---------------------------------------------------
-   Illustrates the "why not just a text box" argument. Deliberately generic:
-   an empty room with a single input, against a wall of staffed screens. No
-   likeness, insignia or borrowed interface language of any kind. */
-.contrast { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; padding-bottom: 20px; }
-.contrast-panel { margin: 0; }
-.contrast-panel svg { width: 100%; height: auto; display: block; border-radius: 14px;
-  box-shadow: 10px 10px 0 var(--ink); }
-.contrast-panel figcaption { margin-top: 26px; font-size: 18px; line-height: 1.55; color: #45555a; }
-.contrast-panel figcaption b { color: var(--ink); }
-@media (max-width: 900px) {
-  .contrast { grid-template-columns: 1fr; gap: 44px; }
-  .contrast-panel svg { box-shadow: 7px 7px 0 var(--ink); }
-}
+/* --- the airlock ----------------------------------------------------------
+   Illustration for the "why not just a text box" argument. Full width beneath
+   the section's two columns. */
+.split .airlock { grid-column: 1 / -1; margin: 54px 0 0; }
+/* The artwork ships with its own card, shadow and title bar, so this frame stays
+   bare — a border here would be a frame drawn around a frame. */
+.airlock img { width: 100%; height: auto; display: block; }
+.airlock figcaption { margin-top: 28px; max-width: 780px; font-size: 19px; line-height: 1.6; color: #45555a; }
+.airlock figcaption b { display: block; color: var(--ink); font-size: 22px; margin-bottom: 8px; }
+@media (max-width: 900px) { .split .airlock { margin-top: 34px; } }
