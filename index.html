@@ -122,6 +122,24 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 .airlock.bridge { margin-top: 44px; }
 .airlock.bridge img { border-radius: 12px; }
 @media (max-width: 900px) { .split.has-art { row-gap: 26px; } .airlock img { max-width: 100%; } }
+
+/* --- alternating text/art rows --------------------------------------------
+   NOTE: styles.css in this repo is DEAD. index.html links no stylesheet and
+   carries everything in this block. Put CSS here or it will not apply. */
+.duo { display: grid; gap: 74px; margin-bottom: 96px; }
+.duo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.duo-copy h3 { margin: 0 0 16px; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1;
+  letter-spacing: -.01em; color: var(--ink); text-wrap: balance; }
+.duo-copy p { margin: 0; font-size: 18px; line-height: 1.65; color: #45555a; }
+.duo-art { margin: 0; min-width: 0; }
+.duo-art img { display: block; width: 100%; height: auto; border-radius: 14px;
+  box-shadow: 0 18px 44px rgba(23,31,33,.16); }
+@media (max-width: 900px) {
+  .duo { gap: 48px; }
+  .duo-row, .duo-row.flip { grid-template-columns: 1fr; gap: 24px; }
+  .duo-row.flip .duo-art { order: 2; }
+  .duo-row.flip .duo-copy { order: 1; }
+}
 </style>
 </head>
 <body>
@@ -181,26 +199,35 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
         <p>The other option is a bridge. Everybody has a station, a screen and an opinion. The captain can see what any of them sees. Somebody tells you the engines will not take it, and he is usually right.</p>
         <p><b>I love Computer. Sometimes I want to talk to Scotty.</b></p>
       </div>
-      <figure class="airlock reveal delay-2">
-        <img src="assets/initiative-blocked.png" width="1000" height="562" loading="lazy" decoding="async"
-             alt="An astronaut floating outside a sealed airlock. A red light is lit, the pizza is inside, and the panel reads: the initiative is blocked." />
-        <figcaption>
-          <b>Don&rsquo;t get locked out by your own stack.</b>
-          Nothing dramatic happened here. No agent went rogue and nobody changed the door codes.
-          One of them asked a question forty minutes ago, nobody saw it, and everything behind it stopped.
-          That is the failure this is built for &mdash; not the uprising, the question you missed.
-        </figcaption>
-      </figure>
-      <figure class="airlock bridge reveal delay-3">
-        <img src="assets/bridge.jpeg" width="1200" height="724" loading="lazy" decoding="async"
-             alt="A ship's bridge. Nine crew, each at a console with its own screens, pizza boxes on every surface, and the viewscreen reading: pizza delivery confirmed." />
-        <figcaption>
-          <b>Or everybody gets a station.</b>
-          Nine of them, nine screens, and every one can put a hand up. You see the whole room at
-          once instead of asking it questions one at a time &mdash; and somebody in it is allowed
-          to tell you the engines will not take it.
-        </figcaption>
-      </figure>
+    </section>
+
+
+    <section class="shell duo" aria-label="One control, or a bridge">
+      <div class="duo-row reveal">
+        <div class="duo-copy">
+          <h3>Don&rsquo;t get locked out by your own stack.</h3>
+          <p>Nothing dramatic happened here. No agent went rogue and nobody changed the door
+             codes. One of them asked a question forty minutes ago, nobody saw it, and
+             everything behind it stopped. That is the failure this is built for &mdash; not the
+             uprising, the question you missed.</p>
+        </div>
+        <figure class="duo-art">
+          <img src="assets/nocontrol.jpg" width="1200" height="746" loading="lazy" decoding="async"
+               alt="An astronaut adrift outside a sealed hatch, tether loose, a red light lit, the pizza still inside." />
+        </figure>
+      </div>
+      <div class="duo-row flip reveal delay-1">
+        <figure class="duo-art">
+          <img src="assets/bridge.jpg" width="1200" height="724" loading="lazy" decoding="async"
+               alt="A ship's bridge. Nine crew, each at a console with its own screens, and the viewscreen reading pizza delivery confirmed." />
+        </figure>
+        <div class="duo-copy">
+          <h3>Or everybody gets a station.</h3>
+          <p>Nine of them, nine screens, and every one can put a hand up. You see the whole room
+             at once instead of asking it questions one at a time &mdash; and somebody in it is
+             allowed to tell you the engines will not take it.</p>
+        </div>
+      </div>
     </section>
 
     <section class="loop shell" aria-label="Adaptive product loop">
