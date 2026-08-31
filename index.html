@@ -105,6 +105,23 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
   .shell{width:min(100% - 24px,1180px)}.nav>.button{display:none}.nav{grid-template-columns:1fr}.hero{min-height:auto;padding-block:55px}.hero-art{min-height:380px}.hero-art img{width:115%}.status-card{transform:scale(.85)}.status-one{left:0}.status-two{right:-5%;top:10%}h1{font-size:58px}.lede{font-size:17px}.section{padding-block:90px}.split{gap:25px}.section-copy{padding-top:0;font-size:18px}.loop{grid-template-columns:1fr}.loop-card{border-right:0;border-bottom:1px solid var(--line)!important}.loop-card:last-child{border-bottom:0!important}.world{height:430px}.tile{transform:scale(.78)}.tile-a{left:0}.tile-b{left:28%}.tile-c{right:-4%}.tile-d{right:3%}.mission-card{width:230px}.integration-grid{grid-template-columns:1fr}.integration-grid div{border-right:0!important;border-bottom:1px solid var(--line)!important}.integration-grid div:last-child{border-bottom:0!important}.cta{padding:38px 24px}.signup{grid-template-columns:1fr}.footer{margin-top:40px}
 }
 
+
+/* --- the airlock and the bridge -------------------------------------------
+   NOTE FOR WHOEVER EDITS THIS NEXT: styles.css in this repo is DEAD. index.html
+   links no stylesheet and carries everything in this block. Three CSS edits were
+   made to that file before anyone noticed they could not possibly apply.
+
+   The figures span both columns of .split. Without an explicit column span and a
+   max-width they set the grid's intrinsic width, which blew 1fr 1fr out to
+   1080px and 1280px inside an 1180px shell and pushed the copy off screen. */
+.split.has-art { row-gap: 40px; }
+.split .airlock { grid-column: 1 / -1; margin: 0; min-width: 0; }
+.airlock img { display: block; width: 100%; max-width: 720px; height: auto; }
+.airlock figcaption { margin-top: 20px; max-width: 720px; font-size: 18px; line-height: 1.6; color: #45555a; }
+.airlock figcaption b { display: block; color: var(--ink); font-size: 21px; margin-bottom: 6px; }
+.airlock.bridge { margin-top: 44px; }
+.airlock.bridge img { border-radius: 12px; }
+@media (max-width: 900px) { .split.has-art { row-gap: 26px; } .airlock img { max-width: 100%; } }
 </style>
 </head>
 <body>
@@ -153,7 +170,7 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
       </div>
     </section>
 
-    <section id="why" class="section shell split">
+    <section id="why" class="section shell split has-art">
       <div class="section-heading reveal">
         <p class="eyebrow">THE WRONG LESSON</p>
         <h2>The model is not the interface.</h2>
@@ -165,7 +182,7 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
         <p><b>I love Computer. Sometimes I want to talk to Scotty.</b></p>
       </div>
       <figure class="airlock reveal delay-2">
-        <img src="assets/initiative-blocked.jpg" width="1600" height="900" loading="lazy" decoding="async"
+        <img src="assets/initiative-blocked.png" width="1000" height="562" loading="lazy" decoding="async"
              alt="An astronaut floating outside a sealed airlock. A red light is lit, the pizza is inside, and the panel reads: the initiative is blocked." />
         <figcaption>
           <b>Don&rsquo;t get locked out by your own stack.</b>
@@ -175,7 +192,7 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
         </figcaption>
       </figure>
       <figure class="airlock bridge reveal delay-3">
-        <img src="assets/bridge.jpeg" width="1600" height="966" loading="lazy" decoding="async"
+        <img src="assets/bridge.jpeg" width="1200" height="724" loading="lazy" decoding="async"
              alt="A ship's bridge. Nine crew, each at a console with its own screens, pizza boxes on every surface, and the viewscreen reading: pizza delivery confirmed." />
         <figcaption>
           <b>Or everybody gets a station.</b>
