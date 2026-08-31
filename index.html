@@ -126,7 +126,7 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 /* --- alternating text/art rows --------------------------------------------
    NOTE: styles.css in this repo is DEAD. index.html links no stylesheet and
    carries everything in this block. Put CSS here or it will not apply. */
-.duo { display: grid; gap: 74px; margin-bottom: 96px; }
+.duo { display: grid; gap: 74px; padding-top: 130px; margin-bottom: 96px; }
 .duo-row { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
 .duo-copy h3 { margin: 0 0 16px; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1;
   letter-spacing: -.01em; color: var(--ink); text-wrap: balance; }
@@ -135,7 +135,7 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 .duo-art img { display: block; width: 100%; height: auto; border-radius: 14px;
   box-shadow: 0 18px 44px rgba(23,31,33,.16); }
 @media (max-width: 900px) {
-  .duo { gap: 48px; }
+  .duo { gap: 48px; padding-top: 84px; }
   .duo-row, .duo-row.flip { grid-template-columns: 1fr; gap: 24px; }
   .duo-row.flip .duo-art { order: 2; }
   .duo-row.flip .duo-copy { order: 1; }
@@ -192,10 +192,7 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
       <div class="duo-row reveal">
         <div class="duo-copy">
           <h3>You can&rsquo;t command what you can&rsquo;t see.</h3>
-          <p>Hand the whole ship to something that only speaks when spoken to, and you find out
-             what it did afterwards. Not because it went rogue &mdash; because nothing on your
-             screen ever changed. Getting caught off guard is not bad luck. It is what happens
-             when there was nothing to look at.</p>
+          <p>It doesn&rsquo;t go rogue. It goes quiet. You find out after it mattered.</p>
         </div>
         <figure class="duo-art">
           <img src="assets/nocontrol.jpg" width="1200" height="746" loading="lazy" decoding="async"
@@ -208,11 +205,9 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
                alt="A ship's bridge. Nine crew, each at a console with its own screens, and the viewscreen reading pizza delivery confirmed." />
         </figure>
         <div class="duo-copy">
-          <h3>So run it like a captain, not a passenger.</h3>
-          <p>Every station visible, every screen live, every one of them able to put a hand up
-             &mdash; and you making the calls. <b>Clean does not have to mean empty.</b> The best
-             interface is not the one with the fewest controls; it is the one where you can
-             always see what is happening and still reach the thing that changes it.</p>
+          <h3>Run it like a captain, not a passenger.</h3>
+          <p>Every station lit. Every screen live. Every agent can raise a hand &mdash; and you
+             make the call. <b>Clean doesn&rsquo;t mean empty.</b></p>
         </div>
       </div>
     </section>
