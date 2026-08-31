@@ -84,9 +84,9 @@
       answer something. You do not know which one.
     </p>
     <p>
-      Pizza Fleet reads those panes and draws them as a castle. Every agent gets a body
-      and a face. The one that needs you has a <span class="q">?</span> over its head.
-      You click it and answer from inside the world.
+      Pizza Fleet draws them as a castle. Every agent gets a body and a face. The one that
+      needs you has a <span class="q">?</span> over its head. You click it and answer from
+      inside the world, without going to find the terminal.
     </p>
   </section>
 
@@ -100,10 +100,37 @@
   </section>
 
   <section>
-    <h2>How it works</h2>
+    <h2>How it works — and this is the actual idea</h2>
     <p>
-      It watches the terminal. It does not ask the agents to check in — a stuck agent
-      stops reporting, and silence reads as fine.
+      Big teams never settled tabs versus spaces by making everyone use the same editor.
+      They agreed a small shared convention and kept their own tools. That is thirty lines
+      of config, and it ended a decade of argument.
+    </p>
+    <p>
+      Pizza Fleet is that, for agents. An agent ends its turn with a few agreed lines
+      saying what it is working on. The viewer reads those lines and draws them. Twenty-odd
+      agents do it here every day.
+    </p>
+    <p>
+      If an agent does not speak the convention, nothing breaks — the viewer falls back to
+      reading its screen, which is worse and honest about being worse. So you can adopt it
+      one agent at a time, and you never have to leave the tools you already use.
+    </p>
+  </section>
+
+  <section>
+    <h2>What is still an open question</h2>
+    <p>
+      Pizza Fleet draws your agents as an <strong>org chart</strong> — someone in charge,
+      initiatives under them, workers under those. That is one way work gets organised. It
+      is the way this was built because it is how its author works.
+    </p>
+    <p>
+      You might stack tasks in a queue. You might run a pipeline of fixed stages, or throw
+      five agents at one problem, or just keep branching one conversation. <strong>If your
+      work is not shaped like an org chart, this will draw a confident picture of something
+      you are not doing</strong> — and that is the thing we most want to find out before
+      building anything else on top of it.
     </p>
   </section>
 
@@ -111,7 +138,8 @@
     <h2>What it is not</h2>
     <ul>
       <li><strong>It is not ready.</strong> There is nothing to buy and nothing to sign up for.</li>
-      <li>It runs on one Mac. It needs tmux and Claude Code already installed.</li>
+      <li>It runs on one Mac, and it reads agents running in <strong>tmux</strong>. Claude Code is what it has been used with.</li>
+      <li>The convention is not a published spec yet. It works here; nobody outside has adopted it.</li>
       <li>It does not do teams, and it does not do the cloud.</li>
       <li>It cannot see an agent that is not running in a terminal.</li>
       <li>There are no users yet. Nobody has told us it is good.</li>
@@ -126,7 +154,7 @@
     <!-- STAMP IS MACHINE-WRITTEN FROM GIT AT PUBLISH TIME. Never type it by hand:
          a stamp a person types can claim a commit that is not the one shipped, and
          this line is the only signal on the page that the project is still alive. -->
-    Built from <code>b8cd6a7</code> on <code>2026-08-30</code>.
+    Built from <code>a69eea8</code> on <code>2026-08-30</code>.
   </footer>
 
 </div>
