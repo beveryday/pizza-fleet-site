@@ -317,12 +317,14 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
         <div>
           <b>Free &mdash; the Clean world</b>
           <span>Your whole fleet as a living world. The rituals, the quests, the map &mdash; in the clean theme, drawn from nothing. On your own machine.</span>
-          <!-- DOWNLOAD-SLOT: free-tier link lands here when fulfillment exists (cto) -->
+          <a class="text-link" href="https://github.com/beveryday/pizza-fleet-releases/releases/latest">Download free <span>&darr;</span></a>
         </div>
         <div>
           <b>$10, once &mdash; the worlds</b>
-          <span>Everything in free, plus the Dungeon, the Mars Base and the Factory &mdash; and the mini&#8209;games as they land.</span>
-          <!-- STRIPE-SLOT: one-time Worlds checkout link lands here (cto) -->
+          <span>Everything in free, plus the Dungeon, the Mars Base and the Factory &mdash; and the mini&#8209;games as they land. Checkout hands you the download on the spot &mdash; the link lasts ten minutes, so save the file, not the link.</span>
+          <!-- STRIPE-SLOT: Brandon's $10 Payment Link URL lands here; strings for the Stripe product are in
+               pizza-fleet:docs/marketing/lines.md "THE CHECKOUT STRINGS". Success URL is wired by his
+               fulfillment setup (docs/product/fulfillment.md), not by this page. -->
         </div>
         <div>
           <b>$10 a month &mdash; the crew</b>
