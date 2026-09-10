@@ -322,9 +322,12 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
         <div>
           <b>$10, once &mdash; the worlds</b>
           <span>Everything in free, plus the Dungeon, the Mars Base and the Factory &mdash; and the mini&#8209;games as they land. It is early, and it grows: every update on the way to the full game is included. Checkout hands you the download on the spot &mdash; the link lasts ten minutes, so save the file, not the link.</span>
-          <!-- STRIPE-SLOT: Brandon's $10 Payment Link URL lands here; strings for the Stripe product are in
-               pizza-fleet:docs/marketing/lines.md "THE CHECKOUT STRINGS". Success URL is wired by his
-               fulfillment setup (docs/product/fulfillment.md), not by this page. -->
+          <a class="text-link" href="https://buy.stripe.com/bJecN5aVQaJw30f7sB5AQ01">Buy the Worlds Pack <span>&rarr;</span></a>
+          <!-- MERGE GATE, DO NOT MERGE ON THE LINK ALONE: the payment link is LIVE and takes real
+               money, but fulfillment is NOT finished (edge-function secrets unset, no dmg in the
+               bucket) — a completed checkout today delivers nothing. This branch merges only after
+               one verified end-to-end purchase actually delivers a download. Gate recorded in
+               pizza-fleet:docs/marketing/lines.md. -->
         </div>
         <div>
           <b>$10 a month &mdash; the crew</b>
