@@ -40,6 +40,20 @@ Done means: the Free action reaches an approved downloadable Clean package; Worl
 
 Validation here was read-only GitHub metadata, branch HTML, and PR source inspection. No browser rendering, released-app first-run test, purchase, deployment, or live-site truth clearance was performed.
 
+## Render and link verification — 2026-09-10
+
+I rendered the proposed page from `/tmp/pizza-fleet-cmo-funnel-candidate.html` in Chrome headless at 1440×1600, with the site assets supplied beside the candidate. The hero, navigation, pricing cards, and artwork rendered; this produces `/tmp/pizza-fleet-cmo-funnel-rendered.png` in the Codex environment. The first render without adjacent assets showed broken images, so I repeated it with the candidate's `assets/` directory and inspected the resulting screenshot. The second render is the meaningful result.
+
+Each candidate pricing link was followed to its live destination without selecting a payment method or submitting checkout:
+
+| card | href followed | result | evidence |
+|---|---|---|---|
+| Free | `https://github.com/beveryday/pizza-fleet-releases/releases/latest` | **FAIL — no downloadable release** | GitHub returned `302` to `/releases`, then `200`; the page rendered `There aren’t any releases here`. The link is live but cannot fulfill Free yet. |
+| Worlds | `https://buy.stripe.com/bJecN5aVQaJw30f7sB5AQ01` | **PASS — live Stripe Checkout, delivery gate still FAIL** | `curl -I` returned `HTTP/2 200`; Chrome rendered `Pizza Fleet — the Worlds Pack`, `$10.00`, and the supplied Worlds description. I did not click Pay. The page's actual download delivery remains unverified and the committed merge gate still blocks publication until one completed purchase delivers a real dmg. |
+| Crew | `https://buy.stripe.com/7sYdR9bZU18WeIX8wF5AQ00` | **PASS — live Stripe Checkout** | `curl -I` returned `HTTP/2 200`; Chrome rendered `Subscribe to Pizza Fleet — Crew (Multiplayer Realms)`, `$10.00 per month`, and the supplied early-access disclosure. I did not click Subscribe. |
+
+The two Stripe links are therefore live and correctly targeted, with no dead or placeholder hrefs. “Pass” here means destination and product presentation; it does not waive Worlds fulfillment or Crew capability/security gates. The Free card is a concrete launch blocker until the releases repository has an artifact.
+
 ## Subsequent live-payment sync — received 2026-09-09
 
 The CxO sync message reports these live links; this desk did not open or independently verify them:
