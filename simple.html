@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="theme-color" content="#f4eddf"/>
+<meta name="description" content="A real-time 3D world for the AI agents already doing your work."/>
+<title>Pizza Fleet — Walk into your work</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Public+Sans:wght@400;500;600&display=swap"/>
+<style>
+:root{--paper:#f4eddf;--ink:#171f21;--soft:#5c6663;--line:#d8cfbc;--red:#c2482e;--gold:#d9a441;--room:#e7dfcc}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:"Public Sans",-apple-system,sans-serif;font-size:17px;line-height:1.6}
+section{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:9vh 7vw;position:relative;overflow:hidden}
+h1,h2{font-family:Fraunces,Georgia,serif;font-weight:600;letter-spacing:-.02em;line-height:1.02;text-wrap:balance}
+h1{font-size:clamp(52px,9vw,124px)}
+h2{font-size:clamp(36px,5.5vw,64px);max-width:14ch}
+.lede{max-width:44ch;font-size:clamp(17px,1.5vw,21px);color:var(--soft);margin-top:28px}
+.lede b{color:var(--ink)}
+.acts{display:flex;gap:14px;margin-top:36px;flex-wrap:wrap}
+.btn{font:600 15px "Public Sans";padding:14px 26px;border-radius:999px;text-decoration:none;letter-spacing:.01em}
+.btn-a{background:var(--ink);color:var(--paper)}
+.btn-b{color:var(--ink);border:2px solid var(--ink)}
+.tag{position:absolute;top:34px;left:7vw;font:600 14px "Public Sans";letter-spacing:.06em}
+.tag i{color:var(--red);font-style:normal}
+/* ── screen visuals: rooms, a question, worlds — drawn, not screenshotted ── */
+.viz{position:absolute;inset:0;pointer-events:none;z-index:0}
+section>*:not(.viz){position:relative;z-index:1}
+.rooms{position:absolute;right:-4vw;top:50%;transform:translateY(-50%) rotate(-4deg);display:grid;grid-template-columns:repeat(4,minmax(64px,9vw));gap:12px;opacity:.9}
+.rooms i{aspect-ratio:1;background:var(--room);border-radius:14px;border:1px solid var(--line);position:relative}
+.rooms i.lit{background:#fff}
+.rooms i.lit::after{content:"?";position:absolute;inset:0;display:grid;place-items:center;font:600 clamp(22px,3vw,34px) Fraunces;color:var(--red);animation:bob 2.2s ease-in-out infinite}
+.rooms i:nth-child(3){background:var(--gold);opacity:.5}
+.rooms i:nth-child(6),.rooms i:nth-child(11){background:var(--ink);opacity:.12}
+@keyframes bob{50%{transform:translateY(-7px)}}
+.dark{background:var(--ink);color:var(--paper)}
+.dark .lede{color:#a8b0ad}.dark .lede b{color:var(--paper)}
+.dark h2 em{color:var(--red);font-style:normal}
+.hal{position:absolute;right:10vw;top:50%;transform:translateY(-50%);width:clamp(120px,18vw,240px);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle at 50% 45%,#ff6a3d 0%,#c2482e 18%,#4a1006 55%,#000 75%);box-shadow:0 0 90px 12px rgba(194,72,46,.35);animation:pulse 4s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 130px 26px rgba(194,72,46,.5)}}
+.reply{font-family:Fraunces;font-style:italic;font-size:clamp(22px,2.6vw,32px);color:var(--soft);margin-top:18px}
+.dark .reply{color:#a8b0ad}
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:2px solid var(--ink);border-radius:18px;overflow:hidden;margin-top:44px;max-width:980px;background:#fff}
+.tiers>div{padding:30px 28px;border-right:2px solid var(--ink)}
+.tiers>div:last-child{border-right:0}
+.tiers b{display:block;font-family:Fraunces;font-size:22px;margin-bottom:10px}
+.tiers p{font-size:15px;color:var(--soft);line-height:1.55}
+.tiers p strong{color:var(--ink)}
+.tiers .price{font:600 15px "Public Sans";color:var(--red);letter-spacing:.05em;text-transform:uppercase;margin-bottom:6px}
+.tiers a{display:inline-block;margin-top:16px;font:600 14px "Public Sans";color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.gate{max-width:52ch;color:var(--soft);font-size:15.5px;margin-top:26px}
+footer{padding:28px 7vw;display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);font-size:14px;color:var(--soft)}
+footer b{font-family:Fraunces;font-size:17px;color:var(--ink)}
+@media(max-width:820px){.rooms{display:none}.hal{position:static;transform:none;margin:34px 0 0}.tiers{grid-template-columns:1fr}.tiers>div{border-right:0;border-bottom:2px solid var(--ink)}.tiers>div:last-child{border-bottom:0}}
+</style>
+</head>
+<body>
+
+<section id="hero">
+  <p class="tag"><i>✦</i> PIZZA FLEET</p>
+  <div class="viz"><div class="rooms">
+    <i></i><i class="lit"></i><i></i><i></i><i></i><i></i><i></i><i class="lit" style="animation-delay:1s"></i><i></i><i></i><i></i><i></i>
+  </div></div>
+  <h1>Walk into<br>your work.</h1>
+  <p class="lede">Your codebase becomes a world you can explore. Every AI agent you run is a character with a face, a room, and a job — and <b>the one that needs you has a ? over its head.</b></p>
+  <div class="acts">
+    <a class="btn btn-a" href="https://github.com/beveryday/pizza-fleet-releases/releases/latest">Download free &darr;</a>
+    <a class="btn btn-b" href="#pricing">Pricing</a>
+  </div>
+</section>
+
+<section class="dark" id="why">
+  <div class="viz"><div class="hal"></div></div>
+  <h2>Don&rsquo;t be locked out of <em>your orchestration.</em></h2>
+  <p class="reply">&ldquo;I&rsquo;m sorry, Dave.&rdquo;</p>
+  <p class="lede">Agents that only report their own health go quiet in exactly the failure you most need to see. Pizza Fleet reads the screen instead — <b>run it like a Captain.</b></p>
+</section>
+
+<section id="world">
+  <div class="viz"><div class="rooms" style="transform:translateY(-50%) rotate(3deg)">
+    <i></i><i></i><i class="lit"></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="lit" style="animation-delay:.7s"></i><i></i><i></i>
+  </div></div>
+  <h2>Everyone is somewhere.</h2>
+  <p class="lede">No dashboard and no digest — a room you move the camera around in. Planning is a quest board. A code review is a hearing. <b>Leave a question too long and &ldquo;a question awaits&rdquo; becomes &ldquo;the party is blocked.&rdquo;</b></p>
+</section>
+
+<section id="pricing">
+  <h2>Free to walk in.</h2>
+  <div class="tiers">
+    <div>
+      <span class="price">Free</span>
+      <b>The Clean world</b>
+      <p>Your whole fleet as a living world — rituals, quests, the map. On your own machine. No account.</p>
+      <a href="https://github.com/beveryday/pizza-fleet-releases/releases/latest">Download &darr;</a>
+    </div>
+    <div>
+      <span class="price">$10, once</span>
+      <b>The Worlds Pack</b>
+      <p>The Dungeon, the Mars Base and the Factory — and the mini&#8209;games as they land. It is early, and it grows.</p>
+      <!-- HELD: Worlds buy link returns when one e2e purchase delivers (lines.md, THE FUNNEL MERGE GATE) -->
+    </div>
+    <div>
+      <span class="price">$10 / month</span>
+      <b>The Crew</b>
+      <p><strong>Crew play is not built yet</strong> — subscribing funds it and locks your seat. Billing starts today; the realms arrive when they are real.</p>
+      <!-- HELD: Crew link returns per the same gate + the Stripe description paste -->
+    </div>
+  </div>
+  <p class="gate">It is not finished. Shared realms are not reachable across machines yet, and it needs a terminal and Claude Code already installed. If you found this, you found it early.</p>
+</section>
+
+<footer><b>✦ PIZZA FLEET</b><span>Turn work into an adventure.</span><span>© 2026</span></footer>
+</body>
+</html>
