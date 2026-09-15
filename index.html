@@ -150,26 +150,34 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 .duo-copy .reply { font-size: clamp(20px, 2.4vw, 26px); line-height: 1.35; font-style: italic;
   color: var(--muted); letter-spacing: -.005em; }
 .duo-fun { text-align: center; max-width: 640px; margin-inline: auto; }
-/* --- the compact duo cycle: big scenes, beat text overlaid, crossfading --- */
-.duo-cycle { position: relative; overflow: hidden; border-radius: 18px; box-shadow: 0 18px 44px rgba(23,31,33,.2); }
-.cycle-copy { position: absolute; left: 0; right: 0; bottom: 0; z-index: 3; padding: 110px 44px 40px; background: linear-gradient(to top, rgba(16,37,49,.85), rgba(16,37,49,0)); pointer-events: none; }
-.cycle-beat { position: absolute; left: 44px; right: 44px; bottom: 40px; }
-.cycle-beat h3 { margin: 0 0 10px; font-size: clamp(30px, 4vw, 48px); line-height: 1.05; letter-spacing: -.01em; color: #fffaf0; text-wrap: balance; text-shadow: 0 2px 18px rgba(16,37,49,.55); }
-.cycle-beat .reply { color: rgba(255,250,240,.88); }
-.beat-a { animation: beatA 12s ease-in-out infinite; }
-.beat-b { animation: beatB 12s ease-in-out infinite; opacity: 0; }
-@keyframes beatA { 0%, 42% { opacity: 1; transform: none; } 50%, 92% { opacity: 0; transform: translateY(-14px); } 100% { opacity: 1; transform: none; } }
-@keyframes beatB { 0%, 42% { opacity: 0; transform: translateY(14px); } 50%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(14px); } }
-.cycle-art { position: relative; min-width: 0; z-index: 1; }
-.cycle-art img { display: block; width: 100%; height: clamp(380px, 46vw, 600px); object-fit: cover; }
-.cycle-art .img-b { position: absolute; inset: 0; animation: imgB 12s ease-in-out infinite; opacity: 0; }
-@keyframes imgB { 0%, 42% { opacity: 0; } 50%, 92% { opacity: 1; } 100% { opacity: 0; } }
+/* --- the compact duo cycle: offset overlapping scenes, mirrored beat entrances --- */
+.duo-cycle { position: relative; height: clamp(430px, 50vw, 640px); }
+.cycle-art { position: absolute; inset: 0; z-index: 1; }
+.cycle-art img { position: absolute; width: 68%; height: 84%; object-fit: cover; border-radius: 16px; box-shadow: 0 24px 60px rgba(16,37,49,.28); }
+.cycle-art .img-a { left: 0; top: 0; animation: sceneA 12s ease-in-out infinite; }
+.cycle-art .img-b { right: 0; bottom: 0; opacity: .22; animation: sceneB 12s ease-in-out infinite; }
+@keyframes sceneA { 0%, 42% { opacity: 1; } 50%, 92% { opacity: .3; } 100% { opacity: 1; } }
+@keyframes sceneB { 0%, 42% { opacity: .22; } 50%, 92% { opacity: 1; } 100% { opacity: .22; } }
+.cycle-copy { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+.cycle-beat { position: absolute; background: rgba(16,37,49,.82); border-radius: 12px; padding: 20px 26px; max-width: min(540px, 78%); backdrop-filter: blur(4px); }
+.cycle-beat h3 { margin: 0 0 10px; font-size: clamp(26px, 3.2vw, 40px); line-height: 1.05; letter-spacing: -.01em; color: #fffaf0; text-wrap: balance; }
+.cycle-beat .reply { margin: 0; color: rgba(255,250,240,.88); }
+.beat-a { left: 26px; bottom: 30px; opacity: 0; animation: beatA 12s ease-in-out infinite; }
+.beat-b { right: 26px; bottom: 30px; opacity: 0; animation: beatB 12s ease-in-out infinite; }
+@keyframes beatA { 0% { opacity: 0; transform: translateX(-46px); } 6%, 40% { opacity: 1; transform: none; } 48%, 100% { opacity: 0; transform: translateX(-46px); } }
+@keyframes beatB { 0%, 50% { opacity: 0; transform: translateX(46px); } 56%, 90% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; transform: translateX(46px); } }
 @media (prefers-reduced-motion: reduce) {
-  .beat-a, .beat-b, .cycle-art .img-b { animation: none; }
-  .beat-a { opacity: 1; transform: none; }
-  .beat-b, .cycle-art .img-b { display: none; }
+  .cycle-art .img-a, .cycle-art .img-b, .beat-a, .beat-b { animation: none; }
+  .cycle-art .img-b { opacity: .9; }
+  .beat-a, .beat-b { opacity: 1; transform: none; }
 }
-@media (max-width: 900px) { .cycle-copy { padding: 80px 22px 26px; } .cycle-beat { left: 22px; right: 22px; bottom: 26px; } .cycle-art img { height: clamp(300px, 62vw, 420px); } }
+@media (max-width: 900px) {
+  .duo-cycle { height: clamp(400px, 118vw, 560px); }
+  .cycle-art img { width: 86%; height: 58%; }
+  .cycle-beat { padding: 14px 18px; max-width: 88%; }
+  .beat-a { left: 10px; bottom: 14px; }
+  .beat-b { right: 10px; bottom: 14px; }
+}
 /* Pricing must stack on small screens; an inline column count overrides media rules. */
 .pricing-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .pricing-grid > div { min-width: 0; justify-content: start; gap: 12px; }
