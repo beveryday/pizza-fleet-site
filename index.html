@@ -153,7 +153,10 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 .duo-fun > p { max-width: 640px; margin-inline: auto; }
 /* product media renders at the duo's ratified footprint */
 .duo-row .block-media { grid-column: 1 / -1; margin: 10px 0 0; }
-.block-media img { display: block; width: 100%; height: clamp(360px, 44vw, 560px); object-fit: cover; border-radius: 16px; box-shadow: 0 24px 60px rgba(16,37,49,.28); }
+.block-media img, .block-media video { display: block; width: 100%; height: clamp(360px, 44vw, 560px); object-fit: cover; border-radius: 16px; box-shadow: 0 24px 60px rgba(16,37,49,.28); }
+.fun-split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; text-align: left; margin-top: 18px; }
+.fun-split h4 { margin: 0 0 8px; font-family: "Barlow Condensed", sans-serif; font-size: 24px; text-transform: uppercase; letter-spacing: .02em; }
+@media (max-width: 900px) { .fun-split { grid-template-columns: 1fr; } }
 @media (max-width: 900px) { .block-media img { height: clamp(240px, 60vw, 380px); } }
 /* --- the compact duo cycle: offset overlapping scenes, mirrored beat entrances --- */
 .duo-cycle { position: relative; height: clamp(430px, 50vw, 640px); }
@@ -262,13 +265,14 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
           <p>Your own agents and your teammates&rsquo; agents, every one a character with a face, a room, and a job. The one that needs you has a <b>?</b> over its head.</p>
         </div>
         <figure class="duo-art block-media">
-          <img src="assets/mars-base-orbit.webp" width="1400" height="844" loading="lazy" decoding="async"
-               alt="A low-poly Mars base under orbit camera: domes, solar panels, rovers, and two robot crew at the edge of the pad." />
+          <video src="assets/rooms-themes-reel.mp4" width="1408" height="610" autoplay loop muted playsinline preload="metadata"
+                 aria-label="A reel: the bustling base in overview, then the same rooms across themes — Dungeon, Mars Base, Depot, Restaurant, Factory — crossfading between each."></video>
         </figure>
       </div>
       <div class="duo-row flip reveal delay-1">
         <figure class="duo-art">
-          <!-- MEDIA-SLOT S6: the Action capture (quest/?-flow, mock-data preferred) lands here on delivery + review. EMPTY by rule. -->
+          <video src="assets/action-nudge-flow.mp4" width="824" height="522" autoplay loop muted playsinline preload="metadata"
+                 aria-label="The graveyard room: agents with alert and question markers overhead, and a blocked agent's dialog — rate limited — with a Nudge button to send it back to work."></video>
         </figure>
         <div class="duo-copy">
           <p class="eyebrow">ACTION</p>
@@ -279,7 +283,16 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
       <div class="duo-copy duo-fun reveal delay-2">
         <p class="eyebrow">FUN</p>
         <h3>Turn work into an adventure.</h3>
-        <p>Mini games around the standard rituals and activities &mdash; planning, reviews, retros &mdash; played in the world instead of a call.</p>
+        <div class="fun-split">
+          <div>
+            <h4>A themeable, buildable world</h4>
+            <p>Pick your theme and make the base your own.</p>
+          </div>
+          <div>
+            <h4>Mini games</h4>
+            <p>Around standard rituals and activities &mdash; planning, reviews, retros &mdash; played in the world instead of a call.</p>
+          </div>
+        </div>
         <figure class="duo-art block-media" style="margin-top: 28px">
           <img src="assets/archery-mockup.webp" width="1400" height="844" loading="lazy" decoding="async"
                alt="A low-poly archery range: an archer faces the target while a card reads Retro &middot; Brainstorm &mdash; type your answer to draw the bow, and shoot." />
@@ -367,6 +380,11 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 // SHOW_FREE_TIER: default OFF per the tracked marketing record (2026-09-15 pricing
 // ruling). Brandon's word flips it — a one-constant commit, nobody else's call.
 const SHOW_FREE_TIER = false;
+
+// Reduced motion: hold every product video on its first frame.
+if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.querySelectorAll('video[autoplay]').forEach((v) => { v.removeAttribute('autoplay'); v.pause(); });
+}
 
 // HERO_BASE_GIF: the bustling-base capture that animates between themes. EMPTY until
 // the asset lands (mock-data capture, in review) — empty means the mark simply stays,
