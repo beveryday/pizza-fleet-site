@@ -147,6 +147,19 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 .pricing-grid > div { min-width: 0; justify-content: start; gap: 12px; }
 .pricing-grid .text-link { margin-top: auto; padding-top: 16px; }
 .crew-notice { color: var(--ink); font-size: 18px; }
+/* --- rebuilt product cards (2026-09-15). NOTE: styles.css is DEAD, CSS lives here. --- */
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 28px; margin-top: 60px; }
+.card { background: var(--paper); border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); padding: 32px 28px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.card h3 { font-size: 34px; text-transform: uppercase; }
+.card p { margin: 0; color: #526064; line-height: 1.6; }
+.card-tier { font: 800 13px/1 "Barlow Condensed", sans-serif; letter-spacing: .18em; color: var(--red); }
+.card-price { font: italic 800 54px/1 "Barlow Condensed", sans-serif; color: var(--ink); }
+.card-price small { font-size: 20px; color: var(--muted); letter-spacing: .04em; }
+.card-star { border-width: 3px; box-shadow: 12px 12px 0 var(--red); transform: rotate(-1deg); }
+.card-cta { font-weight: 700; font-style: italic; color: var(--ink); }
+.card .button { margin-top: auto; align-self: start; }
+.gate-line { max-width: 64ch; margin: 46px auto 0; text-align: center; color: var(--muted); font-size: 15px; line-height: 1.6; }
+@media (max-width: 900px) { .cards { grid-template-columns: 1fr; } .card-star { transform: none; } }
 @media (max-width: 900px) {
   .pricing-grid { grid-template-columns: 1fr; }
   .pricing-grid > div { border-right: 0; border-bottom: 1px solid var(--line); }
@@ -163,8 +176,6 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
     </a>
     <nav aria-label="Primary navigation">
       <a href="#why">Why</a>
-      <a href="#how">How it works</a>
-      <a href="#integrations">Worlds</a>
     </nav>
     <a class="button button-small" href="#pricing">Pricing</a>
   </header>
@@ -177,7 +188,7 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
         <p class="lede">See at a glance who is blocked and who needs an answer, so nothing sits waiting on you. <b>Every AI agent you run is a character with a face, a room, and a job.</b></p>
         <p class="lede">Planning becomes a quest board, a code review a hearing &mdash; as the games land. <b>Captains &mdash; your fleet is waiting.</b></p>
         <div class="hero-actions">
-          <a class="text-link" href="#how">Look around <span>↘</span></a>
+          <a class="text-link" href="#why">Look around <span>↘</span></a>
         </div>
         <div class="proof-row">
           <span>Four worlds</span><span>Bring your own fleet</span><span>Runs on your own machine</span>
@@ -223,103 +234,6 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
       </div>
     </section>
 
-    <section class="section shell" style="padding-bottom:0">
-      <div class="section-heading centered reveal">
-        <p class="eyebrow">THE SAME OLD RITUALS, BECOMING GAMES</p>
-        <h2>Turn work into an adventure.</h2>
-        <p>Brainstorming, planning, prioritising, retros &mdash; the meetings everyone dreads, becoming games you play in a world instead of a call. Landing as the mini&#8209;games ship.</p>
-      </div>
-    </section>
-
-    <!-- MEDIA-SLOT S3: build-tense mockups (mini-game / overlays) — coming-label treatment REQUIRED. EMPTY by rule. -->
-    <section class="loop shell" aria-label="Adaptive product loop">
-      <div class="loop-card reveal"><span>01</span><h3>Brainstorm</h3><p>Throw ideas around together. The ones you drop will stay on the map, so you can walk back to the one you threw out.</p></div>
-      <div class="loop-card reveal delay-1"><span>02</span><h3>Plan</h3><p>What survives becomes a quest. Your crew will pick them up, and you will see who took what.</p></div>
-      <div class="loop-card reveal delay-2"><span>03</span><h3>Gather</h3><p>Call the crew into a room, put one question to all of them, and watch them argue it out &mdash; when crew play lands.</p></div>
-      <div class="loop-card reveal delay-3"><span>04</span><h3>Hold court</h3><p>A plan will come before you. Give your assent, or send it back for another pass.</p></div>
-    </section>
-
-    <section id="how" class="section shell product-showcase">
-      <div class="product-copy reveal">
-        <p class="eyebrow">YOUR FLEET, ASSEMBLED</p>
-        <h2>Watch the work, not the chat.</h2>
-        <p>No dashboard and no digest. A room you move the camera around in, with your crew in it doing the thing you asked for.</p>
-        <ul>
-          <li><b>Every agent</b> has a face, a body and a room of its own.</li>
-          <li><b>The one that needs you</b> has a <b>?</b> over its head. Quest-giver rules.</li>
-          <li><b>Click one</b> and its screen appears above its head.</li>
-          <li><b>Leave it too long</b> and &ldquo;a question awaits&rdquo; becomes &ldquo;the party is blocked&rdquo;.</li>
-        </ul>
-      </div>
-      <!-- MEDIA-SLOT S2: the wedge capture — live fleet-viz, ?-overhead, theme switch. Priority slot. EMPTY by rule. -->
-      <div class="mockup reveal delay-1">
-        <div class="mockup-bar"><span></span><span></span><span></span><b>Fleet View / Channel Launch</b></div>
-        <div class="world">
-          <div class="tile tile-a"><span>🍕</span><small>Planning</small></div>
-          <div class="tile tile-b active"><span>🚀</span><small>Build</small></div>
-          <div class="tile tile-c"><span>✓</span><small>Review</small></div>
-          <div class="tile tile-d"><span>📦</span><small>Ship</small></div>
-          <div class="road road-one"></div><div class="road road-two"></div>
-          <div class="agent agent-one">A1</div><div class="agent agent-two">A2</div><div class="agent agent-three">A3</div>
-          <div class="mission-card"><small>ACTIVE INITIATIVE</small><b>Creator onboarding</b><div><i><u></u></i></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section dark-section">
-      <div class="shell">
-        <div class="section-heading centered reveal">
-          <p class="eyebrow">THE AFTER-ACTION REPORT</p>
-          <h2>Instruments, not conclusions.</h2>
-          <p>Put chat, pull requests and product numbers on one clock and the picture stops being
-             simple. Ask how much more got done and you get several answers &mdash; every one of
-             them a defensible measurement. Most tools pick one. This one is being built to show you all of them
-             and let you do the reading.</p>
-        </div>
-        <div class="roles">
-          <article class="role reveal"><span>&#9678;</span><h3>One clock</h3><p>Every series at the resolution its data actually has, side by side. A lane shown on its own asserts a conclusion by leaving the others out.</p></article>
-          <article class="role reveal delay-1"><span>&#9672;</span><h3>Months, not before and after</h3><p>Split a period in two and you can report a rise that the months show as a dip, then a recovery. Resolution is not a detail. It is the finding.</p></article>
-          <article class="role reveal delay-2"><span>&#9651;</span><h3>Missing is not zero</h3><p>&ldquo;We never measured this&rdquo; and &ldquo;the thing being measured stopped&rdquo; look identical on most charts. They are different facts, so they are drawn differently.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section shell integrations">
-      <div class="section-heading reveal">
-        <p class="eyebrow">WHAT THE WORLD IS BUILT OUT OF</p>
-        <h2>Your goals become landmarks.</h2>
-        <p>Towers you will see from anywhere on the map. Connect your tickets, alerts, deploys and revenue, and the world will show you what is really happening instead of a dashboard you have to interpret. Bring your fleet. Visualize any agent stack. <em>(Every stack &mdash; as we wire them in.)</em></p>
-      </div>
-      <div class="integration-grid reveal delay-1">
-        <div><b>Landmarks</b><span>Goals you can see from across the map</span></div>
-        <div><b>The siege</b><span>Bugs massing outside the walls, so you know what is coming before it lands</span></div>
-        <div><b>Connectors</b><span>Tickets, alerts, deploys and revenue, drawn in</span></div>
-        <div><b>The court</b><span>Where a plan comes before you and waits on your word</span></div>
-      </div>
-    </section>
-
-    <section class="section shell">
-      <div class="section-heading centered reveal">
-        <p class="eyebrow">HOWEVER YOU ALREADY WORK</p>
-        <h2>Start from a template, or bring your own.</h2>
-        <p>Design your own fleet, or wire in the setup you already run &mdash; then connect it to a collaborator&rsquo;s so the same work never gets done twice. <b>Crew play is planned. Today a realm is single&#8209;player.</b></p>
-      </div>
-    </section>
-
-    <section id="integrations" class="section shell integrations">
-      <div class="section-heading reveal">
-        <p class="eyebrow">CHOOSE YOUR WORLD</p>
-        <h2>Design your castle and cast the characters who work in it.</h2>
-        <p>Not skins. The dungeon has rooms, torchlight and a treasury. The Mars base takes the walls away rather than recolouring them. Pick the one you want to sit in all day.</p>
-      </div>
-      <div class="integration-grid reveal delay-1">
-        <div><b>The Dungeon</b><span>Rooms, torchlight, a great hall and a graveyard</span></div>
-        <div><b>Mars Base</b><span>Surface station, walls dropped to a kerb</span></div>
-        <div><b>The Factory</b><span>Plant floor, blueprint greybox</span></div>
-        <div><b>Clean</b><span>No models at all, drawn from nothing</span></div>
-      </div>
-    </section>
-
     <!-- MEDIA-SLOT S4: theme montage beside the tiers. EMPTY by rule. -->
     <section id="pricing" class="section shell">
       <div class="section-heading centered reveal">
@@ -327,43 +241,42 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
         <h2>Free to walk in. Ten dollars to own the worlds.</h2>
         <p>One purchase for the worlds, yours for good. Crew subscriptions fund multiplayer before it is built.</p>
       </div>
-      <div class="integration-grid pricing-grid reveal delay-1">
-        <div>
-          <b>Free &mdash; the Clean world</b>
-          <span>Your whole fleet as a living world. The rituals, the quests, the map &mdash; in the clean theme, drawn from nothing. On your own machine.</span>
-          <a class="text-link" href="https://github.com/beveryday/pizza-fleet-releases/releases/latest">Download free <span>&darr;</span></a>
-        </div>
-        <div>
-          <b>$10, once &mdash; the worlds</b>
-          <span>Everything in free, plus the Dungeon, the Mars Base and the Factory &mdash; and the mini&#8209;games as they land. It is early, and it grows: every update on the way to the full game is included.</span>
+      <div class="cards reveal delay-1">
+        <article class="card">
+          <p class="card-tier">FREE</p>
+          <p class="card-price">$0</p>
+          <h3>The Clean world</h3>
+          <p>Your whole fleet as a living world. The rituals, the quests, the map &mdash; in the clean theme, drawn from nothing. On your own machine.</p>
+          <a class="button card-btn" href="https://github.com/beveryday/pizza-fleet-releases/releases/latest">Download free &darr;</a>
+        </article>
+        <article class="card card-star">
+          <p class="card-tier">WORLDS</p>
+          <p class="card-price">$10 <small>once</small></p>
+          <h3>The Worlds Pack</h3>
+          <p>Everything in free, plus the Dungeon, the Mars Base and the Factory &mdash; and the mini&#8209;games as they land. It is early, and it grows: every update on the way to the full game is included.</p>
           <!-- HELD: the Worlds buy link (buy.stripe.com/bJecN5aVQaJw30f7sB5AQ01) and the
                delivery sentence ("Checkout hands you the download on the spot — ten-minute
                link") return TOGETHER when one e2e purchase actually delivers a download.
                Gate: the tracked marketing record. -->
-        </div>
-        <div>
+        </article>
+        <article class="card">
+          <p class="card-tier">CREW</p>
+          <p class="card-price">$10 <small>a month</small></p>
+          <h3>The Crew</h3>
           <strong class="crew-notice">Crew play is not built yet</strong>
-          <b>$10 a month &mdash; the crew</b>
-          <span>Multiplayer realms: your team joins your world from their own machines. <b>Crew play is not built yet</b> &mdash; subscribing now funds it and locks your seat. Billing starts today; the realms arrive when they are real.</span>
-          <span style="display:block;margin-top:10px;font-weight:600;font-style:italic">Bring your crew. It&rsquo;s game time!</span>
+          <p>Multiplayer realms: your team joins your world from their own machines. <b>Crew play is not built yet</b> &mdash; subscribing now funds it and locks your seat. Billing starts today; the realms arrive when they are real.</p>
+          <p class="card-cta">Bring your crew. It&rsquo;s game time!</p>
           <!-- HELD: the Crew subscribe link (buy.stripe.com/7sYdR9bZU18WeIX8wF5AQ00) returns when
                the Crew Stripe description matches THE CREW CHECKOUT STRINGS (8e's paste) and
                the Worlds e2e opens the paid surfaces. Card copy above is true and stays. -->
-        </div>
+        </article>
       </div>
       <!-- REFUND-SLOT: TWO SENTENCES, tier-shaped, land here beside the tiers — one for
            Worlds ($10 once), one for Crew ($10/mo) — per the cfo proposal's structure
            (confirmed 2026-09-13). Text is whatever Brandon ACTUALLY APPROVES, verbatim;
            EMPTY by rule until his yes. Authority CEO/CPO+Brandon. -->
+      <p class="gate-line">It is not finished. Shared realms are not reachable across machines yet, connectors are one source deep, and progress history is still being built. It needs a terminal and Claude Code already installed.</p>
     </section>
-
-    <section id="cta" class="cta shell reveal">
-      <div>
-        <p class="eyebrow">WHAT IT DOES NOT DO YET</p>
-        <h2>It is not finished.</h2>
-        <p style="max-width:60ch">Shared realms are not reachable across machines yet, connectors are one source deep, and progress history is still being built. It needs a terminal and Claude Code already installed.</p>
-      </div>
-      </section>
   </main>
 
   <footer class="footer shell">
