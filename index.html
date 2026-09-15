@@ -47,6 +47,11 @@ h1 em { color: var(--red); font-style: italic; }
 .proof-row span { border: 1px solid var(--line); background: rgba(255,255,255,.35); border-radius: 99px; padding: 9px 13px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
 .hero-art { position: relative; min-height: 590px; display: grid; place-items: center; }
 .hero-art img { position: relative; z-index: 2; width: min(590px, 110%); height: auto; filter: drop-shadow(0 25px 28px rgba(14,35,44,.18)); mix-blend-mode: multiply; transform: rotate(1deg); }
+/* hero media sequence: the mark shows on load, then fades away to the bustling-base capture */
+.hero-art .hero-mark { transition: opacity 1.2s ease; }
+.hero-art .hero-base { position: absolute; z-index: 2; width: min(590px, 110%); height: auto; opacity: 0; transition: opacity 1.2s ease; border-radius: 14px; box-shadow: 0 18px 44px rgba(23,31,33,.16); mix-blend-mode: normal; transform: none; filter: none; }
+.hero-art.swap .hero-mark { opacity: 0; }
+.hero-art.swap .hero-base { opacity: 1; }
 .orbit { position: absolute; border: 2px solid rgba(16,37,49,.12); border-radius: 50%; transform: rotate(-28deg); }
 .orbit-one { width: 520px; height: 280px; }
 .orbit-two { width: 410px; height: 220px; border-color: rgba(233,75,45,.18); }
@@ -224,7 +229,8 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
       <div class="hero-art reveal delay-1" role="img" aria-label="Pizza slices flying like a retro rocket fleet">
         <div class="orbit orbit-one"></div>
         <div class="orbit orbit-two"></div>
-        <img src="assets/hero-mark.jpg" width="1180" height="1180" fetchpriority="high" decoding="async" alt="Pizza Fleet retro pizza rocket logo" />
+        <img class="hero-mark" src="assets/hero-mark.jpg" width="1180" height="1180" fetchpriority="high" decoding="async" alt="Pizza Fleet retro pizza rocket logo" />
+        <img class="hero-base" hidden width="640" height="400" decoding="async" alt="A bustling base, animating between themes." />
         <div class="status-card status-two"><i></i><span>Quest accepted</span></div>
       </div>
     </section>
@@ -345,6 +351,18 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 // SHOW_FREE_TIER: default OFF per the tracked marketing record (2026-09-15 pricing
 // ruling). Brandon's word flips it — a one-constant commit, nobody else's call.
 const SHOW_FREE_TIER = false;
+
+// HERO_BASE_GIF: the bustling-base capture that animates between themes. EMPTY until
+// the asset lands (mock-data capture, in review) — empty means the mark simply stays,
+// no broken state. Wire the path here when the file is in assets/.
+const HERO_BASE_GIF = '';
+if (HERO_BASE_GIF && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const art = document.querySelector('.hero-art');
+  const base = document.querySelector('.hero-base');
+  const start = () => { base.hidden = false; setTimeout(() => art.classList.add('swap'), 2200); };
+  base.src = HERO_BASE_GIF;
+  if (base.decode) { base.decode().then(start).catch(() => {}); } else { base.onload = start; }
+}
 if (SHOW_FREE_TIER) { document.getElementById('free-card').hidden = false; }
 
 const observer = new IntersectionObserver((entries) => {
