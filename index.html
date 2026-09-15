@@ -142,8 +142,9 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
   letter-spacing: -.01em; color: var(--ink); text-wrap: balance; }
 .duo-copy p { margin: 0; font-size: 18px; line-height: 1.65; color: #45555a; }
 .duo-art { margin: 0; min-width: 0; }
-.duo-art img { display: block; width: 100%; height: auto; border-radius: 14px;
+.duo-art img, .duo-art video { display: block; width: 100%; height: auto; border-radius: 14px;
   box-shadow: 0 18px 44px rgba(23,31,33,.16); }
+.duo-copy h4 { margin: 0 0 10px; font-family: "Barlow Condensed", sans-serif; font-size: 28px; text-transform: uppercase; letter-spacing: .02em; }
 @media (max-width: 900px) {
   .duo { gap: 48px; padding-top: 84px; }
   .duo-row, .duo-row.flip { grid-template-columns: 1fr; gap: 24px; }
@@ -152,15 +153,8 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 }
 .duo-copy .reply { font-size: clamp(20px, 2.4vw, 26px); line-height: 1.35; font-style: italic;
   color: var(--muted); letter-spacing: -.005em; }
-.duo-fun { text-align: center; max-width: 900px; margin-inline: auto; }
-.duo-fun > p { max-width: 640px; margin-inline: auto; }
-/* product media renders at the duo's ratified footprint */
-.duo-row .block-media { grid-column: 1 / -1; margin: 10px 0 0; }
-.block-media img, .block-media video { display: block; width: 100%; height: clamp(360px, 44vw, 560px); object-fit: cover; border-radius: 16px; box-shadow: 0 24px 60px rgba(16,37,49,.28); }
-.fun-split { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; text-align: left; margin-top: 18px; }
-.fun-split h4 { margin: 0 0 8px; font-family: "Barlow Condensed", sans-serif; font-size: 24px; text-transform: uppercase; letter-spacing: .02em; }
-@media (max-width: 900px) { .fun-split { grid-template-columns: 1fr; } }
-@media (max-width: 900px) { .block-media img { height: clamp(240px, 60vw, 380px); } }
+.duo-fun { text-align: center; }
+.duo-fun h3 { margin: 0; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; letter-spacing: -.01em; color: var(--ink); }
 /* --- the compact duo cycle: offset overlapping scenes, mirrored beat entrances --- */
 .duo-cycle { position: relative; height: clamp(430px, 50vw, 640px); }
 .cycle-art { position: absolute; inset: 0; z-index: 1; }
@@ -264,42 +258,48 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
     </section>
 
     <section id="why" class="shell duo" aria-label="The three problems">
-      <div class="duo-row reveal">
+      <div class="duo-row flip reveal">
+        <figure class="duo-art">
+          <video src="assets/hero-overview.mp4" width="1280" height="832" autoplay loop muted playsinline preload="metadata"
+                 aria-label="An overview of the dungeon world, zooming from the whole base down to rooms of working agents with alert and question markers overhead."></video>
+        </figure>
         <div class="duo-copy">
           <p class="eyebrow">Less matrix. More quest!</p>
           <h3>Watch the work, not the chat.</h3>
           <p>Your own agents and your teammates&rsquo; agents, every one a character with a face, a room, and a job. The one that needs you has a <b>?</b> over its head.</p>
         </div>
-        <figure class="duo-art block-media">
-          <video src="assets/rooms-themes-reel.mp4" width="1408" height="610" autoplay loop muted playsinline preload="metadata"
-                 aria-label="A reel: the bustling base in overview, then the same rooms across themes — Dungeon, Mars Base, Depot, Restaurant, Factory — crossfading between each."></video>
-        </figure>
       </div>
-      <div class="duo-row flip reveal delay-1">
-        <figure class="duo-art">
-          <video src="assets/action-nudge-flow.mp4" width="824" height="522" autoplay loop muted playsinline preload="metadata"
-                 aria-label="The graveyard room: agents with alert and question markers overhead, and a blocked agent's dialog — rate limited — with a Nudge button to send it back to work."></video>
-        </figure>
+      <div class="duo-row reveal delay-1">
         <div class="duo-copy">
           <p class="eyebrow">ACTION</p>
           <h3>Keep them going.</h3>
           <p>Easy options to work with your agents &mdash; answer the one that&rsquo;s blocked, hand out the next quest, and get back to your own work.</p>
         </div>
+        <figure class="duo-art">
+          <video src="assets/action-nudge-flow.mp4" width="824" height="522" autoplay loop muted playsinline preload="metadata"
+                 aria-label="The graveyard room: agents with alert and question markers overhead, and a blocked agent's dialog — rate limited — with a Nudge button to send it back to work."></video>
+        </figure>
       </div>
-      <div class="duo-copy duo-fun reveal delay-2">
+      <div class="duo-fun reveal delay-2">
         <p class="eyebrow">FUN</p>
         <h3>Turn work into an adventure.</h3>
-        <div class="fun-split">
-          <div>
-            <h4>A themeable, buildable world</h4>
-            <p>Pick your theme and make the base your own.</p>
-          </div>
-          <div>
-            <h4>Mini games</h4>
-            <p>Around standard rituals and activities &mdash; planning, reviews, retros &mdash; played in the world instead of a call.</p>
-          </div>
+      </div>
+      <div class="duo-row flip reveal">
+        <figure class="duo-art">
+          <video src="assets/rooms-themes-reel.mp4" width="1408" height="610" autoplay loop muted playsinline preload="metadata"
+                 aria-label="A reel: the bustling base in overview, then the same rooms across themes — Dungeon, Mars Base, Depot, Restaurant, Factory — crossfading between each."></video>
+        </figure>
+        <div class="duo-copy">
+          <h4>A themeable, buildable world</h4>
+          <p>Pick your theme and make the base your own.</p>
         </div>
-        <figure class="duo-art block-media" style="margin-top: 28px">
+      </div>
+      <div class="duo-row reveal delay-1">
+        <div class="duo-copy">
+          <h4>Mini games</h4>
+          <p>Around standard rituals and activities &mdash; planning, reviews, retros &mdash; played in the world instead of a call.</p>
+        </div>
+        <figure class="duo-art">
           <img src="assets/archery-mockup.webp" width="1400" height="844" loading="lazy" decoding="async"
                alt="A low-poly archery range: an archer faces the target while a card reads Retro &middot; Brainstorm &mdash; type your answer to draw the bow, and shoot." />
         </figure>
