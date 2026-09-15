@@ -144,6 +144,28 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 }
 .duo-copy .reply { font-size: clamp(20px, 2.4vw, 26px); line-height: 1.35; font-style: italic;
   color: var(--muted); letter-spacing: -.005em; }
+.duo-fun { text-align: center; max-width: 640px; margin-inline: auto; }
+/* --- the compact duo cycle: two beats alternate by slide/fade, scenes crossfade --- */
+.duo-cycle { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.cycle-copy { position: relative; min-height: 150px; }
+.cycle-beat { position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: center; }
+.cycle-beat h3 { margin: 0 0 16px; font-size: clamp(28px, 3.4vw, 40px); line-height: 1.1; letter-spacing: -.01em; color: var(--ink); text-wrap: balance; }
+.beat-a { animation: beatA 12s ease-in-out infinite; }
+.beat-b { animation: beatB 12s ease-in-out infinite; opacity: 0; }
+@keyframes beatA { 0%, 42% { opacity: 1; transform: none; } 50%, 92% { opacity: 0; transform: translateY(-14px); } 100% { opacity: 1; transform: none; } }
+@keyframes beatB { 0%, 42% { opacity: 0; transform: translateY(14px); } 50%, 92% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(14px); } }
+.cycle-art { position: relative; min-width: 0; }
+.cycle-art img { display: block; width: 100%; height: auto; border-radius: 14px; box-shadow: 0 18px 44px rgba(23,31,33,.16); }
+.cycle-art .img-b { position: absolute; inset: 0; animation: imgB 12s ease-in-out infinite; opacity: 0; }
+@keyframes imgB { 0%, 42% { opacity: 0; } 50%, 92% { opacity: 1; } 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .beat-a, .beat-b, .cycle-art .img-b { animation: none; }
+  .cycle-copy { min-height: 0; }
+  .cycle-beat { position: static; opacity: 1; transform: none; }
+  .beat-b { margin-top: 22px; }
+  .cycle-art .img-b { display: none; }
+}
+@media (max-width: 900px) { .duo-cycle { grid-template-columns: 1fr; gap: 24px; } .cycle-copy { min-height: 190px; } }
 /* Pricing must stack on small screens; an inline column count overrides media rules. */
 .pricing-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .pricing-grid > div { min-width: 0; justify-content: start; gap: 12px; }
@@ -214,26 +236,50 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
       </div>
     </section>
 
-    <section id="why" class="shell duo" aria-label="One control, or a bridge">
+    <section id="why" class="shell duo" aria-label="The three problems">
+      <div class="duo-cycle reveal" aria-label="Locked out, or on the bridge">
+        <div class="cycle-copy">
+          <div class="cycle-beat beat-a">
+            <h3>Don&rsquo;t be locked out of your orchestration.</h3>
+            <p class="reply">&ldquo;I&rsquo;m sorry, Dave.&rdquo;</p>
+          </div>
+          <div class="cycle-beat beat-b">
+            <h3>Run it like a Captain.</h3>
+            <p class="reply">&ldquo;Computer, on screen.&rdquo;</p>
+          </div>
+        </div>
+        <div class="cycle-art">
+          <img class="img-a" src="assets/nocontrol.webp" width="640" height="400" loading="lazy" decoding="async"
+               alt="An astronaut drifting outside a sealed hatch, tether loose in his hand, a red light lit, the pizza still inside." />
+          <img class="img-b" src="assets/bridge.webp" width="640" height="400" loading="lazy" decoding="async"
+               alt="A ship's bridge, alive: nine crew at consoles, holograms turning, and the viewscreen reading pizza delivery confirmed." />
+        </div>
+      </div>
       <div class="duo-row reveal">
         <div class="duo-copy">
-          <h3>Don&rsquo;t be locked out of your orchestration.</h3>
-          <p class="reply">&ldquo;I&rsquo;m sorry, Dave.&rdquo;</p>
+          <p class="eyebrow">VISIBILITY</p>
+          <h3>Watch the work, not the chat.</h3>
+          <p>Your own agents and your teammates&rsquo; agents, every one a character with a face, a room, and a job. The one that needs you has a <b>?</b> over its head.</p>
         </div>
         <figure class="duo-art">
-          <img src="assets/nocontrol.webp" width="640" height="400" loading="lazy" decoding="async"
-               alt="An astronaut drifting outside a sealed hatch, tether loose in his hand, a red light lit, the pizza still inside." />
+          <!-- MEDIA-SLOT S2: the Visibility capture (live fleet-viz, ?-overhead, mock-data preferred). Priority slot, rehomed. EMPTY by rule. -->
         </figure>
       </div>
       <div class="duo-row flip reveal delay-1">
         <figure class="duo-art">
-          <img src="assets/bridge.webp" width="640" height="400" loading="lazy" decoding="async"
-               alt="A ship's bridge, alive: nine crew at consoles, holograms turning, and the viewscreen reading pizza delivery confirmed." />
+          <!-- MEDIA-SLOT S6: the Action capture (quest/?-flow, mock-data preferred) lands here on delivery + review. EMPTY by rule. -->
         </figure>
         <div class="duo-copy">
-          <h3>Run it like a Captain.</h3>
-          <p class="reply">&ldquo;Computer, on screen.&rdquo;</p>
+          <p class="eyebrow">ACTION</p>
+          <h3>Keep them going.</h3>
+          <p>Easy options to work with your agents &mdash; answer the one that&rsquo;s blocked, hand out the next quest, and get back to your own work.</p>
         </div>
+      </div>
+      <div class="duo-copy duo-fun reveal delay-2">
+        <p class="eyebrow">FUN</p>
+        <h3>Turn work into an adventure.</h3>
+        <p>Mini games around the standard rituals and activities &mdash; planning, reviews, retros &mdash; played in the world instead of a call.</p>
+        <!-- MEDIA-SLOT S5: the Fun capture (mini-game) lands here on designer delivery + review. EMPTY by rule. -->
       </div>
     </section>
 
