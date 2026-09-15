@@ -149,7 +149,12 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 }
 .duo-copy .reply { font-size: clamp(20px, 2.4vw, 26px); line-height: 1.35; font-style: italic;
   color: var(--muted); letter-spacing: -.005em; }
-.duo-fun { text-align: center; max-width: 640px; margin-inline: auto; }
+.duo-fun { text-align: center; max-width: 900px; margin-inline: auto; }
+.duo-fun > p { max-width: 640px; margin-inline: auto; }
+/* product media renders at the duo's ratified footprint */
+.duo-row .block-media { grid-column: 1 / -1; margin: 10px 0 0; }
+.block-media img { display: block; width: 100%; height: clamp(360px, 44vw, 560px); object-fit: cover; border-radius: 16px; box-shadow: 0 24px 60px rgba(16,37,49,.28); }
+@media (max-width: 900px) { .block-media img { height: clamp(240px, 60vw, 380px); } }
 /* --- the compact duo cycle: offset overlapping scenes, mirrored beat entrances --- */
 .duo-cycle { position: relative; height: clamp(430px, 50vw, 640px); }
 .cycle-art { position: absolute; inset: 0; z-index: 1; }
@@ -256,7 +261,7 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
           <h3>Watch the work, not the chat.</h3>
           <p>Your own agents and your teammates&rsquo; agents, every one a character with a face, a room, and a job. The one that needs you has a <b>?</b> over its head.</p>
         </div>
-        <figure class="duo-art">
+        <figure class="duo-art block-media">
           <img src="assets/mars-base-orbit.webp" width="1400" height="844" loading="lazy" decoding="async"
                alt="A low-poly Mars base under orbit camera: domes, solar panels, rovers, and two robot crew at the edge of the pad." />
         </figure>
@@ -275,7 +280,7 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
         <p class="eyebrow">FUN</p>
         <h3>Turn work into an adventure.</h3>
         <p>Mini games around the standard rituals and activities &mdash; planning, reviews, retros &mdash; played in the world instead of a call.</p>
-        <figure class="duo-art" style="margin: 28px auto 0; max-width: 720px;">
+        <figure class="duo-art block-media" style="margin-top: 28px">
           <img src="assets/archery-mockup.webp" width="1400" height="844" loading="lazy" decoding="async"
                alt="A low-poly archery range: an archer faces the target while a card reads Retro &middot; Brainstorm &mdash; type your answer to draw the bow, and shoot." />
         </figure>
