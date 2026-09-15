@@ -149,7 +149,9 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 .pricing-grid .text-link { margin-top: auto; padding-top: 16px; }
 .crew-notice { color: var(--ink); font-size: 18px; }
 /* --- rebuilt product cards (2026-09-15). NOTE: styles.css is DEAD, CSS lives here. --- */
-.cards { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 28px; margin-top: 60px; }
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 28px; margin-top: 60px; max-width: 920px; margin-inline: auto; }
+.button[disabled] { background: var(--muted); cursor: not-allowed; }
+.button[disabled]:hover { transform: none; box-shadow: 5px 5px 0 var(--ink); }
 .card { background: var(--paper); border: 2px solid var(--ink); box-shadow: 8px 8px 0 var(--ink); padding: 32px 28px; display: flex; flex-direction: column; gap: 14px; min-width: 0; }
 .card h3 { font-size: 34px; text-transform: uppercase; }
 .card p { margin: 0; color: #526064; line-height: 1.6; }
@@ -238,11 +240,14 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
     <section id="pricing" class="section shell">
       <div class="section-heading centered reveal">
         <p class="eyebrow">WHAT IT COSTS</p>
-        <h2>Free to walk in. Ten dollars to own the worlds.</h2>
-        <p>One purchase for the worlds, yours for good. Crew subscriptions fund multiplayer before it is built.</p>
+        <h2>Two ways to play.</h2>
       </div>
       <div class="cards reveal delay-1">
-        <article class="card">
+        <!-- The free card is SWITCHED, not deleted: SHOW_FREE_TIER in the page script
+             (default off) renders it. Brandon's word flips the switch, nobody else's.
+             Ruling: the tracked marketing record, 2026-09-15. Copy re-verifies against
+             the record at flip-on. -->
+        <article class="card" id="free-card" hidden>
           <p class="card-tier">FREE</p>
           <p class="card-price">Free</p>
           <h3>The Clean world</h3>
@@ -253,7 +258,8 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
           <p class="card-tier">WORLDS</p>
           <p class="card-price">$10 <small>once</small></p>
           <h3>The Worlds Pack</h3>
-          <p>Everything in free, plus the Dungeon, the Mars Base and the Factory &mdash; and the mini&#8209;games as they land. It is early, and it grows: every update on the way to the full game is included.</p>
+          <p>Download the game and play in the default themes. One purchase, yours for good.</p>
+          <button class="button card-btn" type="button" disabled>Coming Soon</button>
           <!-- HELD: the Worlds buy link (buy.stripe.com/bJecN5aVQaJw30f7sB5AQ01) and the
                delivery sentence ("Checkout hands you the download on the spot — ten-minute
                link") return TOGETHER when one e2e purchase actually delivers a download.
@@ -263,19 +269,18 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
           <p class="card-tier">CREW</p>
           <p class="card-price">$10 <small>a month</small></p>
           <h3>The Crew</h3>
-          <strong class="crew-notice">Crew play is not built yet</strong>
-          <p>Multiplayer realms: your team joins your world from their own machines. <b>Crew play is not built yet</b> &mdash; subscribing now funds it and locks your seat. Billing starts today; the realms arrive when they are real.</p>
+          <p>Multiplayer realms: your team joins your world from their own machines.</p>
           <p class="card-cta">Bring your crew. It&rsquo;s game time!</p>
+          <button class="button card-btn" type="button" disabled>Coming Soon</button>
           <!-- HELD: the Crew subscribe link (buy.stripe.com/7sYdR9bZU18WeIX8wF5AQ00) returns when
                the Crew Stripe description matches THE CREW CHECKOUT STRINGS (8e's paste) and
-               the Worlds e2e opens the paid surfaces. Card copy above is true and stays. -->
+               the Worlds e2e opens the paid surfaces. -->
         </article>
       </div>
       <!-- REFUND-SLOT: TWO SENTENCES, tier-shaped, land here beside the tiers — one for
            Worlds ($10 once), one for Crew ($10/mo) — per the cfo proposal's structure
            (confirmed 2026-09-13). Text is whatever Brandon ACTUALLY APPROVES, verbatim;
            EMPTY by rule until his yes. Authority CEO/CPO+Brandon. -->
-      <p class="gate-line">It is not finished. Shared realms are not reachable across machines yet, connectors are one source deep, and progress history is still being built. It needs a terminal and Claude Code already installed.</p>
     </section>
   </main>
 
@@ -290,6 +295,11 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
   </footer>
 
   <script>
+// SHOW_FREE_TIER: default OFF per the tracked marketing record (2026-09-15 pricing
+// ruling). Brandon's word flips it — a one-constant commit, nobody else's call.
+const SHOW_FREE_TIER = false;
+if (SHOW_FREE_TIER) { document.getElementById('free-card').hidden = false; }
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
