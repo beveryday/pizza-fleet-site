@@ -248,7 +248,9 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
         <div class="orbit orbit-one"></div>
         <div class="orbit orbit-two"></div>
         <img class="hero-mark" src="assets/hero-mark.jpg" width="1180" height="1180" fetchpriority="high" decoding="async" alt="Pizza Fleet retro pizza rocket logo" />
-        <video class="hero-base" src="assets/hero-overview.mp4" muted loop playsinline preload="auto" hidden
+        <!-- Hero video PULLED by the owner (quality). The sequence code stays; re-wire by
+             restoring a src on this element when a better encode passes review. -->
+        <video class="hero-base" muted loop playsinline preload="auto" hidden
                aria-label="An overview of the dungeon world, zooming from the whole base down to rooms of working agents with alert and question markers overhead."></video>
         <div class="status-card status-two"><i></i><span>Quest accepted</span></div>
       </div>
