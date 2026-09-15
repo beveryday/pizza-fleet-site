@@ -2,3 +2,4 @@ node_modules/
 .DS_Store
 *.log
 /Users/brandonevery/pizza-fleet-site/.worktrees/
+.worktrees/
