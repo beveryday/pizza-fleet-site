@@ -6,6 +6,7 @@
   @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap');
 
   :root{
+    color-scheme: light dark;
     --bg:#f7f4ee; --surface:#ffffff; --surface-2:#efeade; --ink:#211d16; --ink-dim:#6b6355;
     --border:#ded6c4; --accent:#c1662a; --accent-soft:#f0dcc9;
     --good:#3f7a4f; --good-soft:#dde9de; --warn:#a3792f; --warn-soft:#f2e6d0; --wait:#6b6355; --wait-soft:#eae5d8;
@@ -26,6 +27,7 @@
   }
 
   *{box-sizing:border-box}
+  code{ overflow-wrap:anywhere; }
   body{ background:var(--bg); color:var(--ink); font-family:var(--font-body); margin:0; padding-inline:20px; }
   .wrap{ max-width:880px; margin:0 auto; padding-block:44px 70px; }
 
@@ -51,7 +53,7 @@
   .pill.progress{ background:var(--warn-soft); color:var(--warn); }
   .pill.waiting{ background:var(--wait-soft); color:var(--wait); }
   .pill.answered{ background:var(--accent-soft); color:var(--accent); }
-  .pill.flag{ background:#f2e6d0; color:#a3792f; }
+  .pill.flag{ background:var(--warn-soft); color:var(--warn); }
   .pill.todo{ background:var(--surface-2); color:var(--ink-dim); }
   .pill.blocked{ background:var(--warn-soft); color:var(--warn); }
 
@@ -108,7 +110,7 @@
   <p class="kicker">Pizza Fleet · post-brainstorm handoff</p>
   <h1>The Build Ledger</h1><p class="flow-note">Published project snapshot. Full Quest/step detail is embedded below; supporting local documents are not included in this page. <a href="#user-flow">Flow diagram</a> · <a href="#build-hierarchy">All tracked steps</a></p>
   <p class="lede">Current build progress, reviewed plans, and remaining decisions. A reviewed plan is not an implemented feature.</p>
-  <p class="updated">Updated September 19, 2026 at 10:22 PM EDT · Two Campaigns · Chat deferred to Campaign 2 · Live seeding waits for Campaign 1 acceptance</p>
+  <p class="updated">Two Campaigns · Chat deferred to Campaign 2 · Live seeding waits for Campaign 1 acceptance · This snapshot carries one timestamp, at the foot of the page</p>
 
   <p class="estimate"><b>Estimates:</b> rough remaining hands-on desk-hours, including implementation, testing and review; not delivery dates. Access, decisions, queues and rate-limit waits are excluded. Uncalibrated planning ranges; owner time is labeled separately. Held or undefined work stays unestimated until its scope is known.</p>
 
@@ -128,6 +130,19 @@
     <div class="summary-tile"><div class="n">1</div><div class="l">Bounded shell accepted; full features open</div></div>
   </div>
 
+
+  <section id="campaign-1-state" class="group">
+    <h2>Campaign 1 — where its 47 steps stand</h2>
+    <p class="owner-line">Counted from the Step manifests · QL-1 through QL-4 only · narrative evidence, not a tracked completion gate</p>
+    <h3>16 DONE · 31 BLOCKED · 0 READY — unchanged</h3>
+    <p class="item-detail"><b>Convention:</b> a Step is DONE when its own bounded acceptance is recorded, never because a parent Quest, Quest Line or Campaign is. The denominator is the 47 Campaign 1 Steps in the QL-1–QL-4 manifest; the 104-step figure elsewhere on this page counts both Campaigns together and is not comparable to this one. Component work landed on 2026-09-20 inside blocked parents — a committed migration chain, an integrated persistence adapter, two owner rulings — and <b>none of it moved a Step out of BLOCKED.</b> Nothing recorded on this page asserts that Campaign 1 advanced.</p>
+    <h3>Why the 31 are blocked, all 31 classified</h3>
+    <p class="item-detail">Every blocked Step was re-read against its own named conditions on 2026-09-20 rather than assumed still true: <b>1 stale</b>, where the blocker names something that now exists; <b>12 partially stale</b>, where one half is answered and one half is not; <b>2</b> waiting on an owner decision; <b>11</b> waiting on a source or credential that does not exist; <b>5</b> blocked by another Step. No Step is undetermined. Where a Step names several unmet conditions it is filed under the one that would still hold if every other were removed, and the others are kept inside its entry. Record: <code>private/campaign1-focus-2026-09-20/blocker-audit-2026-09-20.md</code>.</p>
+    <h3>11 of the 31 wait on two feeds that do not exist</h3>
+    <p class="item-detail">Nothing produces the <b>initiative→goal</b> linkage for an arbitrary realm, and there is no authorised read path to a user's own <b>Quest-Step / repository</b> tracker. Their absence propagates through QL-1.S09 (The Map) into the membership, character, Great Hall, resource-chip, campaign-mini and progress-carrier Steps, and through the source door into two more. Campaign 1's own recorded outcome is <i>“a new user can create a realm, build their village, and run their fleet from inside the world.”</i> <b>The third clause, and most of the second, cannot be true while those two feeds are missing.</b> Until they exist, the most Campaign 1 acceptance can honestly cover is the narrower path CPO scoped on purpose: enter the main flow, create and name a realm with a chosen structure, save it behind the authenticated boundary, leave, reload, and select it again — with no invented agents, rooms, progress or source data. A village with no agents in it, a Map that is honestly empty and progress chips reading UNAVAILABLE are the correct outputs of the sources that exist, not a shortfall to be covered over. Any acceptance note has to name which feed is still missing, so that “complete” is never read as “the fleet runs”. Two further gates are real but different in kind, being deployment rather than absence: hosted database acquisition, and live provider credentials for agent actions.</p>
+    <h3>One of the two source doors is now open</h3>
+    <p class="item-detail">Recorded 2026-09-20 at 7:12 PM EDT, in the owner's own typed wording: the campaign / Quest-Line map this fleet already maintains is named as the initiative→goal source producer, which satisfies QL-1.S03's stated condition that a producer be available and named. <b>It moves one Step and no more.</b> QL-1.S09 (The Map) still needs the Quest-Step feed, which is still missing, and the actionable-empty display contract below, so QL-3.S03, QL-4.S04, QL-4.S05 and QL-4.S06 stay shut. Two candidate files exist and only one is the authored product map rather than the execution breakdown; choosing between them and justifying the choice is the first task of whoever builds it. Carried forward and not blocking: this source is <i>ours</i>. A stranger's realm has no authored map, so the feed must not be built as though every realm has one — an absent map is a real state for a real user and has to render as absent, never as empty. Record: <code>private/campaign1-focus-2026-09-20/owner-decision-initiative-goal-source.json</code>. This ruling has no entry in the required-gate catalog; it is recorded here as evidence, and it is not counted as a completion gate.</p>
+  </section>
 
   <div class="group">
     <h2>Answered since the last version</h2>
@@ -233,7 +248,7 @@
     <h2>Build in progress</h2>
     <p class="owner-line">CTO implementation · CPO acceptance</p>
     <div class="item"><span class="pill progress">in progress</span><div class="item-body"><div class="item-title">Contract first; new UI still ahead</div><div class="item-detail">The Campaign remains: a new user can create a realm, build their village, and run their fleet inside the world. Pure contract modules are the first implemented steps, not the finished Campaign. Snapshot composition passed independent re-review after its validation fix. Pure join traversal is now independently accepted; no live adapters or completed feature UI are claimed; the bounded shell is now reviewed and integrated. <span title="Local supporting document; not included in this published snapshot">Snapshot review (local reference)</span>.</div><p class="estimate">Remaining effort: see the QL-1–11 ranges below each plan row; this is a summary of that work, not an additional estimate. Full delivery remains unestimated while held scope and external dependencies are unresolved.</p></div></div>
-    <div class="item"><span class="pill blocked">open</span><div class="item-body"><div class="item-title">Actionable-empty vocabulary</div><div class="item-detail">CTO and CPO must settle early decision #4 across QL-2/3/6/7 before those views bake in a fifth state. The accepted four-state resolver does not resolve it.</div><p class="estimate">Remaining: 0.5–2 desk-hours to resolve and review the shared vocabulary; included in QL planning/dependency work, not an extra implementation total.</p></div></div>
+    <div class="item"><span class="pill blocked">open</span><div class="item-body"><div class="item-title">Actionable-empty vocabulary</div><div class="item-detail">The owner ruled on 2026-09-20 that a fifth display state is authorised, narrowly: only for a reachable, genuinely empty surface whose remedy sits on that same surface. What does not exist yet is the contract that would make it implementable — final token name, trigger matrix, per-surface remedy declaration, copy, and both the technical and product reviews. The accepted resolver still declares four states and does not resolve the fifth. QL-2, QL-3, QL-6 and QL-7 are the consumers; none may bake in a fifth state until that contract and its reviews exist.</div><p class="estimate">Remaining: 0.5–2 desk-hours to write and review the shared vocabulary and its trigger matrix; included in QL planning/dependency work, not an extra implementation total. The owner decision itself is answered and costs nothing further.</p></div></div>
   </div>
 <!-- USER-FLOW:START -->
 <section class="group" id="user-flow"><h2>User journey · build progress</h2><p class="flow-note"><b>Campaign 1:</b> QL-1–QL-4 running UI, with Chat unavailable. <b>Campaign 2:</b> unlock after Campaign 1 acceptance; QL-12 live seeding/internal onboarding first, then QL-5–QL-11 and Chat.</p>
@@ -293,6 +308,7 @@
 
 <section class="group" id="end-to-end-scope"><h2>End-to-end user flow</h2><div class="item"><span class="pill progress">open</span><div class="item-body"><div class="item-title">Complete main-menu, auth, fleet-pattern and world-entry journeys</div><div class="item-detail">Required scope added 2026-09-19: returning users, anonymous create/account claim, join code/sign-in/eight-topic briefing, pattern comparison/customization, provider permissions, GitHub skip/reconnect, village coaching, resource HUD, sleep/wake and complete browser journeys. CTO and CPO are reconciling every v7 node with current decisions. Existing hierarchy counts and estimates exclude the pending expansion. Contract-only DONE steps do not complete this gate. <span title="Local supporting document; not included in this published snapshot">Scope and acceptance plan (local reference)</span>.</div></div></div></section>
 
+<p class="item-detail"><b>Read the Step rows below as manifest text, generated 2026-09-18.</b> Each Step's acceptance and blocker sentences are reproduced from the Step manifests and are not rewritten when a condition is later met. Two conditions have since been met and their Step rows still carry the original sentence: <b>QL-1.S03</b>, whose initiative→goal source producer is now named, and the <b>#4 fifth-state</b> clause carried by QL-1.S09 and others, which now has an owner ruling but no implementable contract. Both are recorded above. Neither Step has changed state, and every Step state shown below is current.</p>
 <!-- BUILD-HIERARCHY:START -->
 <section id="build-hierarchy" class="group">
 <h2>Campaign → Quest Lines → Quests → Quest Steps</h2>
@@ -531,7 +547,7 @@
   <div class="group">
     <h2>Parallel execution</h2>
     <p class="owner-line">Exact file ownership · dependency-gated steps · independent review</p>
-    <div class="item"><span class="pill progress">in progress</span><div class="item-body"><div class="item-title">Reviewed batch integrated: realm, consent and rail</div><div class="item-detail">All 11 plans contain 74 bounded steps. Three isolated workers completed QL-2.S01 gallery records, QL-11.S03 consent records and QL-4.S02 rail logic. CTO and CPO accepted each bounded slice. Manager integrated the six declared files; 23 scoped tests pass in main. The completed file claims are released. The follow-on QL-2.S02 create-record and QL-4.S03 selection slices also passed both reviews and are integrated: seventeen additional tests pass. These worker claims are released. CTO and CPO completed the technical/product reviews. Their source-contract and #4 proposals are drafted; the policy decisions remain open. Manager integrates only after both reviews. The prior bounded shell is reviewed, integrated and passes main-checkout static/browser checks. Full feature UI remains open. <span title="Local supporting document; not included in this published snapshot">Step dependencies, file claims and dispatch queue (local reference)</span>.</div><p class="estimate">Effort is already included in the QL-2, QL-4 and QL-11 parent estimates; no additional hours or calendar-speedup claim.</p></div></div>
+    <div class="item"><span class="pill progress">in progress</span><div class="item-body"><div class="item-title">Reviewed batch integrated: realm, consent and rail</div><div class="item-detail">All 11 plans contain 74 bounded steps. Three isolated workers completed QL-2.S01 gallery records, QL-11.S03 consent records and QL-4.S02 rail logic. CTO and CPO accepted each bounded slice. Manager integrated the six declared files; 23 scoped tests pass in main. The completed file claims are released. The follow-on QL-2.S02 create-record and QL-4.S03 selection slices also passed both reviews and are integrated: seventeen additional tests pass. These worker claims are released. CTO and CPO completed the technical/product reviews. Their source-contract and #4 proposals are drafted; the policy decisions remain open. Manager integrates only after both reviews. The prior bounded shell is reviewed, integrated and passes main-checkout static/browser checks. Full feature UI remains open. <span title="Local supporting document; not included in this published snapshot">Step dependencies, file claims and dispatch queue (local reference)</span>.</div><p class="item-detail"><b>Realm persistence v1 — migration, adapter and tests, integrated in main on 2026-09-20.</b> Three review rounds, recorded rather than smoothed over: CTO returned CHANGES REQUIRED twice and passed the third, having measured one of its own prescriptions insufficient and said so; CPO passed and then appended a correction against its own earlier pass, leaving the original sentence standing. The integrated adapter is <code>public/realm-persistence.js</code> at sha256 <code>ea0e37e5c38f8be2f4098b195b5d04324f14890f4dc4642c887e1a936cf10635</code>, with the adapter suite rerun in main at 61 of 61 and the database suite passing 12 steps against a disposable local PostgreSQL that was torn down afterwards. <b>The integrated bytes are not clean.</b> A third defect on the same account/draft branch — recorded as door 3, at <code>public/realm-persistence.js:665</code> — is open and pre-existing: it was already in main before this round, and this round neither introduced nor fixed it. It is chartered separately, and the reviewer's own limit is worth keeping with it: no enumeration could have found it, because the module never records that an account was announced, so two different histories leave byte-identical state. Two further pre-existing non-blocking flags are recorded beside it. <b>Nothing here is deployed.</b> Local integration only — no hosted database, no PostgREST behaviour, and no browser or UI slice; the menu, create-flow and browser tests are a separate claim group and are untouched. This closes no Step, no Quest and no Quest Line. Record: <code>private/campaign1-persistence-2026-09-20/integration.json</code>, including both of its amendments.</p><p class="item-detail"><b>The pattern-catalog and realm-save migrations now have a revision.</b> Both migration files are tracked as of commit <code>b062bac</code> on 2026-09-20 at 5:11 PM EDT. Until then the chain was untracked, which meant a reviewer on any other machine could not obtain a prerequisite the review depended on. <b>Tracked is not deployed and not published:</b> no migration has been applied to a hosted database, and the persistence adapter and its tests above remain untracked working-tree files.</p><p class="estimate">Effort is already included in the QL-2, QL-4 and QL-11 parent estimates; no additional hours or calendar-speedup claim. The persistence slice sits inside the QL-2 persistence parent; no separate hours and no calendar-speedup claim.</p></div></div>
   </div>
 
   <div class="group">
@@ -579,7 +595,7 @@
   </div>
 
   <p class="footer-note">Maintained with each verified build/review milestone. Plan fixes, implemented code and accepted behavior are separate states. Unresolved owner decisions and external-source dependencies stay open. The timestamp below records this published snapshot, not the time you opened the page.</p>
-<p class="footer-note" id="last-updated"><strong>Last updated:</strong> <time datetime="2026-09-20T17:34:06-04:00">September 20, 2026 at 5:34 PM EDT</time></p>
+<p class="footer-note" id="last-updated"><strong>Last updated:</strong> <time datetime="2026-09-20T19:39:29-04:00">September 20, 2026 at 7:39 PM EDT</time></p>
 </div>
 
 <script>
