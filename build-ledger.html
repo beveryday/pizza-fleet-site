@@ -240,7 +240,34 @@
 <p class="owner-line">Updated 2026-09-19 · CTO/CPO flow review in progress · implementation evidence tracked separately</p>
 <p class="flow-note">Follow a branch from the main menu to the world. Cards show implementation progress; arrows show wiring progress. <b>No complete entry journey is connected yet.</b> Partial means reviewed building blocks exist, not a working screen. BLOCKED work has named dependencies. This view is maintained with reviewed handoffs; it is not a live runtime monitor.</p>
 <div class="flow-legend"><span>✓ Done: bounded acceptance</span><span>◐ In progress: partial implementation</span><span>○ Not started</span><span>⚑ Blocked</span><span>↓ Not connected: integration unbuilt</span></div>
-<div class="flow-top"><article class="flow-node partial" data-flow-status="partial"><span class="flow-status">IN PROGRESS — partial</span><h4>Build empty realm</h4><p class="flow-ql">QL-2</p><p>Pure explicit Build composition accepted: one allowed empty-realm intent, zero when denied, no process launch. Authenticated persistence, IDs, retries, catalog resolution and browser wiring remain unbuilt.</p></article>
+<div class="flow-top"><article class="flow-node partial" data-flow-status="partial"><span class="flow-status">IN PROGRESS — partial</span><h4>Main menu / Realm Gallery</h4><p class="flow-ql">QL-2 / QL-4</p><p>Gallery, shell and entry navigation contracts accepted; list/create/join/return UI and browser wiring remain unbuilt.</p></article><div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> Choose an entry route · NOT CONNECTED</div></div>
+<div class="flow-lanes">
+<div class="flow-lane"><h3>Return to a realm</h3>
+<article class="flow-node partial" data-flow-status="partial"><span class="flow-status">IN PROGRESS — partial</span><h4>Existing realm selection</h4><p class="flow-ql">QL-2</p><p>Gallery contract accepted; persistence and entry UI unbuilt.</p></article>
+<div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> Next screen · NOT CONNECTED</div>
+<article class="flow-node todo" data-flow-status="todo"><span class="flow-status">NOT STARTED</span><h4>Restore access and enter</h4><p class="flow-ql">QL-2 / QL-4</p><p>Session restore, permission checks, unavailable/expired recovery.</p></article>
+<div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> To shared world · NOT CONNECTED</div>
+</div>
+<div class="flow-lane"><h3>Join a shared realm</h3>
+<article class="flow-node todo" data-flow-status="todo"><span class="flow-status">NOT STARTED</span><h4>Paste invite code</h4><p class="flow-ql">QL-2</p><p>Validation, expiry, invalid code, cancel and back.</p></article>
+<div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> Next screen · NOT CONNECTED</div>
+<article class="flow-node todo" data-flow-status="todo"><span class="flow-status">NOT STARTED</span><h4>Required sign-in</h4><p class="flow-ql">QL-2 / QL-6</p><p>Authenticate, preserve destination, enforce invite authority.</p></article>
+<div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> Next screen · NOT CONNECTED</div>
+<article class="flow-node blocked" data-flow-status="blocked"><span class="flow-status">BLOCKED — not built</span><h4>Eight-topic briefing</h4><p class="flow-ql">QL-1 / QL-2</p><p>Real sources for people, goals, stack, concepts, work, changelog, issues and metrics; absent feeds stay absent.</p></article>
+<div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> Next screen · NOT CONNECTED</div>
+<article class="flow-node todo" data-flow-status="todo"><span class="flow-status">NOT STARTED</span><h4>Enter permitted realm</h4><p class="flow-ql">QL-2 / QL-7</p><p>First-time provider setup; viewer/editor authority; no implicit spawn.</p></article>
+<div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> To shared world · NOT CONNECTED</div>
+</div>
+<div class="flow-lane"><h3>Create a realm — no sign-in required</h3>
+<article class="flow-node partial" data-flow-status="partial"><span class="flow-status">IN PROGRESS — partial</span><h4>Name and icon</h4><p class="flow-ql">QL-2</p><p>Create contract accepted; defaults, upload/generation and form UI unbuilt.</p></article>
+<div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> Next screen · NOT CONNECTED</div>
+<article class="flow-node todo" data-flow-status="todo"><span class="flow-status">NOT STARTED</span><h4>Choose fleet pattern</h4><p class="flow-ql">QL-2 / QL-3</p><p>Compare presets, customize reporting structure, explicitly adopt; manual selection does not require GitHub.</p></article>
+<div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> Next screen · NOT CONNECTED</div>
+<article class="flow-node blocked" data-flow-status="blocked"><span class="flow-status">BLOCKED — not built</span><h4>Optional GitHub</h4><p class="flow-ql">QL-1 / QL-6 / QL-8</p><p>Connect or skip; repo authority, source suggestions and reconnect need adapters.</p></article>
+<div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> Next screen · NOT CONNECTED</div>
+<article class="flow-node partial" data-flow-status="partial"><span class="flow-status">IN PROGRESS — partial</span><h4>Permissions and providers</h4><p class="flow-ql">QL-2 / QL-6</p><p>Pure defaults accepted: draft freely; sign-in evidence required to save; no provider needed for empty realms; agent permissions separate; bypass off. Real auth, provider/credential adapters, disclosure and enforcement remain unbuilt.</p></article>
+<div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> Next screen · NOT CONNECTED</div>
+<article class="flow-node partial" data-flow-status="partial"><span class="flow-status">IN PROGRESS — partial</span><h4>Build empty realm</h4><p class="flow-ql">QL-2</p><p>Pure explicit Build composition accepted: one allowed empty-realm intent, zero when denied, no process launch. Authenticated persistence, IDs, retries, catalog resolution and browser wiring remain unbuilt.</p></article>
 <div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> Next screen · NOT CONNECTED</div>
 <article class="flow-node partial" data-flow-status="partial"><span class="flow-status">IN PROGRESS — partial</span><h4>Place Hall / King; explicit spawn</h4><p class="flow-ql">QL-3</p><p>Placement contract accepted. Flat fleets may leave Hall without an orchestrator; disclosed runtime spawn and first-time coaching remain unbuilt.</p></article>
 <div class="flow-wire" data-wire-status="todo"><span aria-hidden="true">↓</span> Next screen · NOT CONNECTED</div>
@@ -552,7 +579,7 @@
   </div>
 
   <p class="footer-note">Maintained with each verified build/review milestone. Plan fixes, implemented code and accepted behavior are separate states. Unresolved owner decisions and external-source dependencies stay open. The timestamp below records this published snapshot, not the time you opened the page.</p>
-<p class="footer-note" id="last-updated"><strong>Last updated:</strong> <time datetime="2026-09-20T17:32:14-04:00">September 20, 2026 at 5:32 PM EDT</time></p>
+<p class="footer-note" id="last-updated"><strong>Last updated:</strong> <time datetime="2026-09-20T17:34:06-04:00">September 20, 2026 at 5:34 PM EDT</time></p>
 </div>
 
 <script>
