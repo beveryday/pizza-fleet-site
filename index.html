@@ -104,10 +104,11 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 .integration-grid div { min-height:140px;padding:28px;background:var(--paper);border-right:1px solid var(--line);border-bottom:1px solid var(--line);display:flex;flex-direction:column;justify-content:end; }
 .integration-grid div:nth-child(3n){border-right:0}.integration-grid div:nth-last-child(-n+3){border-bottom:0}.integration-grid b{font:800 32px "Barlow Condensed";text-transform:uppercase}.integration-grid span{color:#6f7778;margin-top:5px}
 .cta { margin-block: 40px 120px; padding: 70px; background: var(--gold); border: 3px solid var(--ink); box-shadow: 14px 14px 0 var(--ink); display:grid;grid-template-columns:1fr;gap:24px;align-items:start; }
-.cta h2 { max-width: 650px; }.cta > div > p:last-child{font-size:18px;line-height:1.6;max-width:600px}.signup{display:grid;grid-template-columns:1fr auto;gap:12px}.signup input{min-width:0;height:54px;border:2px solid var(--ink);background:var(--paper);padding:0 16px;font:600 15px Inter}.success{display:none;grid-column:1/-1;font-weight:700}.signup.submitted .success{display:block}.signup.submitted input,.signup.submitted button{display:none}
+.cta h2 { max-width: 650px; }.cta > div > p:last-child{font-size:18px;line-height:1.6;max-width:600px}.signup{display:grid;grid-template-columns:1fr auto;gap:12px}.signup input{min-width:0;height:54px;border:2px solid var(--ink);background:var(--paper);padding:0 16px;font:600 15px Inter}.success{display:none;grid-column:1/-1;font-weight:700}.signup .success[data-state="err"]{display:block}.signup.submitted .success{display:block}.signup.submitted input,.signup.submitted button{display:none}
 .footer { min-height:120px; border-top:1px solid var(--line); display:grid;grid-template-columns:1fr auto 1fr;align-items:center;font-size:13px }.footer p:last-child{text-align:right}.footer p{color:#6d7474}
 .sr-only { position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0; }
-.reveal { opacity:0; transform:translateY(24px); transition:opacity .75s ease, transform .75s ease; }.reveal.visible{opacity:1;transform:none}.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}
+.reveal { transition:opacity .75s ease, transform .75s ease; }html.has-reveal .reveal{opacity:0;transform:translateY(24px)}html.has-reveal .reveal.visible{opacity:1;transform:none}html.has-reveal .reveal.shown{opacity:1;transform:none;transition:none}.delay-1{transition-delay:.1s}.delay-2{transition-delay:.2s}.delay-3{transition-delay:.3s}
+@media (prefers-reduced-motion: reduce){html.has-reveal .reveal{opacity:1;transform:none;transition:none}}
 @media (max-width: 900px){
   .nav{grid-template-columns:1fr auto}.nav nav{display:none}.hero{grid-template-columns:1fr;padding-top:60px}.hero-art{min-height:500px}.split,.product-showcase,.cta{grid-template-columns:1fr}.loop{grid-template-columns:1fr 1fr}.loop-card:nth-child(2){border-right:0}.loop-card:nth-child(-n+2){border-bottom:1px solid var(--line)}.roles{grid-template-columns:1fr}.integration-grid{grid-template-columns:1fr 1fr}.integration-grid div:nth-child(3n){border-right:1px solid var(--line)}.integration-grid div:nth-child(2n){border-right:0}.integration-grid div:nth-last-child(-n+3){border-bottom:1px solid var(--line)}.integration-grid div:nth-last-child(-n+2){border-bottom:0}.footer{grid-template-columns:1fr;text-align:center;gap:10px;padding-block:30px}.footer p:last-child{text-align:center}
 }
@@ -340,7 +341,10 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
           <p class="card-price">Free</p>
           <h3>The Clean world</h3>
           <p>Your whole fleet as a living world. The rituals, the quests, the map &mdash; in the clean theme, drawn from nothing. On your own machine.</p>
-          <a class="button card-btn" href="https://github.com/beveryday/pizza-fleet-releases/releases/latest">Download free &darr;</a>
+          <a class="button card-btn" href="#waitlist">Join the waitlist &darr;</a>
+          <!-- HELD: "Download free" and its link to pizza-fleet-releases return when a
+               current signed build ships publicly. The repo went private 2026-10-04 and
+               its newest public release predates this codebase, so the link 404s. -->
         </article>
         <article class="card card-star">
           <p class="card-tier">WORLDS</p>
@@ -369,6 +373,28 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
            Worlds ($10 once), one for Crew ($10/mo) — per the cfo proposal's structure
            (confirmed 2026-09-13). Text is whatever Brandon ACTUALLY APPROVES, verbatim;
            EMPTY by rule until his yes. Authority CEO/CPO+Brandon. -->
+    </section>
+
+    <!-- WAITLIST: the one email capture on the page, and the replacement for the dead
+         "Download free" link below — pizza-fleet-releases went private on 2026-10-04 and
+         no current signed build has shipped. The markup reuses the .cta / .signup /
+         .success styles that were already in this file with nothing using them, rather
+         than adding a second set of form styles. Posts to Supabase public.waitlist, the
+         same table dungen.ai posts to, tagged with its own source. -->
+    <section class="cta shell reveal" id="waitlist">
+      <div>
+        <p class="eyebrow">NOT OUT YET</p>
+        <h2>Get the first build.</h2>
+        <p>We&rsquo;re finishing the look and the onboarding. Leave your email and you&rsquo;ll be
+          first through the door.</p>
+      </div>
+      <form class="signup" id="waitlist-form" novalidate>
+        <label class="sr-only" for="waitlist-email">Email address</label>
+        <input id="waitlist-email" name="email" type="email" required autocomplete="email"
+               inputmode="email" placeholder="you@yourcrew.com" />
+        <button class="button" id="waitlist-submit" type="submit">Join the waitlist</button>
+        <p class="success" id="waitlist-status" role="status" aria-live="polite"></p>
+      </form>
     </section>
   </main>
 
@@ -409,16 +435,90 @@ if (art && heroVid) {
 }
 if (SHOW_FREE_TIER) { document.getElementById('free-card').hidden = false; }
 
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach((entry) => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
+// SCROLL REVEAL. Decoration only, and built so that a failure of the decoration can
+// never cost anyone the content. Three things were wrong with the old version, all of
+// them found on dungen.ai (PR #2, 2026-10-04) and all of them present here too:
+//
+// 1. The CSS hid .reveal unconditionally. It now leaves everything visible at rest and
+//    only html.has-reveal hides it, so no JS (or reduced motion) means no hiding rather
+//    than a page of invisible sections.
+// 2. A CSS transition only advances on rendered frames. A throttled or backgrounded
+//    frame creates the 0 -> 1 transition and then never ticks it, pinning the element
+//    at opacity 0 with no CSS rule to blame and no transitionend ever firing. That is
+//    the "whole section stuck dim" bug. Timers still run where frames do not, so .shown
+//    lands a beat after .visible and states the end value outright, transition and all.
+// 3. IntersectionObserver callbacks also need a rendering update, so in the same
+//    throttled frame the observer never fires and the element is never even asked to
+//    appear. A scroll listener fires from the event, not from a frame, so that drives
+//    this instead — a handful of elements and a rect read, cheap enough not to need
+//    the observer.
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  const reveals = Array.prototype.slice.call(document.querySelectorAll('.reveal'));
+  const show = (el) => {
+    if (el.classList.contains('visible')) return;
+    el.classList.add('visible');
+    setTimeout(() => el.classList.add('shown'), 900);
+  };
+  // ORDER MATTERS. Every rect is read here, in one pass, BEFORE either class write
+  // below, and the two writes then happen back to back. Reading a rect in between
+  // flushes style, the browser resolves opacity 0 for real, and the first screen
+  // fades in instead of painting solid.
+  const onFirstScreen = reveals.filter((el) => el.getBoundingClientRect().top < window.innerHeight);
+  onFirstScreen.forEach((el) => { el.classList.add('visible'); el.classList.add('shown'); });
+  document.documentElement.classList.add('has-reveal');
 
-document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  let pending = reveals.filter((el) => !el.classList.contains('visible'));
+  const sweep = () => {
+    if (!pending.length) return;
+    const limit = window.innerHeight * 0.92;
+    pending.filter((el) => el.getBoundingClientRect().top < limit).forEach(show);
+    pending = pending.filter((el) => !el.classList.contains('visible'));
+    if (!pending.length) {
+      removeEventListener('scroll', sweep);
+      removeEventListener('resize', sweep);
+    }
+  };
+  addEventListener('scroll', sweep, { passive: true });
+  addEventListener('resize', sweep);
+}
+
+// WAITLIST -> Supabase. return=minimal is REQUIRED: the table has no SELECT policy for
+// anon, so return=representation would need a read it is not granted and would fail.
+const WL_URL = 'https://jsrjgefqhehiwknseoos.supabase.co/rest/v1/waitlist';
+const WL_KEY = 'sb_publishable_eDvRdW3L6nfHz7MPa5gd2w_UkHPRAHL';
+const wlForm = document.getElementById('waitlist-form');
+if (wlForm) {
+  const wlInput = document.getElementById('waitlist-email');
+  const wlBtn = document.getElementById('waitlist-submit');
+  const wlNote = document.getElementById('waitlist-status');
+  const say = (msg, ok) => {
+    wlNote.textContent = msg;
+    if (ok) { wlNote.removeAttribute('data-state'); wlForm.classList.add('submitted'); }
+    else { wlNote.setAttribute('data-state', 'err'); }
+  };
+  wlForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = wlInput.value.trim();
+    if (!email || !wlInput.checkValidity()) { say('That email does not look right.', false); return; }
+    wlBtn.disabled = true;
+    try {
+      const res = await fetch(WL_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          apikey: WL_KEY,
+          Authorization: 'Bearer ' + WL_KEY,
+          Prefer: 'return=minimal',
+        },
+        body: JSON.stringify({ email, source: 'pizzafleet.app' }),
+      });
+      if (res.status === 201) { say('You\u2019re on the list. We\u2019ll be in touch.', true); }
+      else if (res.status === 409) { say('You\u2019re already on the list.', true); }
+      else { say('That didn\u2019t go through. Try again in a minute?', false); }
+    } catch { say('No connection \u2014 try again in a minute?', false); }
+    wlBtn.disabled = false;
+  });
+}
 
 </script>
 </body>
