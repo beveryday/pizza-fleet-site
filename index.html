@@ -46,7 +46,12 @@ h1 em { color: var(--red); font-style: italic; }
 .proof-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 42px; }
 .proof-row span { border: 1px solid var(--line); background: rgba(255,255,255,.35); border-radius: 99px; padding: 9px 13px; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; }
 .hero-art { position: relative; min-height: 590px; display: grid; place-items: center; }
-.hero-art img { position: relative; z-index: 2; width: min(590px, 110%); height: auto; filter: drop-shadow(0 25px 28px rgba(14,35,44,.18)); mix-blend-mode: multiply; transform: rotate(1deg); }
+/* 100%, not the 110% this was: the 10% bleed past the column is a wide-screen
+   flourish, but between 900px and 1180px the column is narrower than 590px, so the
+   bleed ran off the page (29px each side at 1024px) and the mark was cropped rather
+   than bleeding. Above ~1180px the column is ~594px, so the 590px term already won
+   and the wide look is unchanged. */
+.hero-art img { position: relative; z-index: 2; width: min(590px, 100%); height: auto; filter: drop-shadow(0 25px 28px rgba(14,35,44,.18)); mix-blend-mode: multiply; transform: rotate(1deg); }
 /* hero media sequence: the mark loads first, then SHRINKS AND SLIDES to the
    Quest-Accepted corner (it stays, as a chip) while the overview capture fades in
    and takes over the whole right side of the hero, full bleed. */
@@ -56,8 +61,14 @@ h1 em { color: var(--red); font-style: italic; }
 .hero-art.swap .hero-base { opacity: 1; }
 @media (prefers-reduced-motion: reduce) { .hero-art .hero-mark, .hero-art .hero-base { transition: none; } }
 .orbit { position: absolute; border: 2px solid rgba(16,37,49,.12); border-radius: 50%; transform: rotate(-28deg); }
-.orbit-one { width: 520px; height: 280px; }
-.orbit-two { width: 410px; height: 220px; border-color: rgba(233,75,45,.18); }
+/* These were fixed 520x280 / 410x220, sized for the widest hero, and rotate(-28deg)
+   makes the BOUNDING BOX about 1.135x the width -- 591px inside a 350px phone column.
+   Capped as a share of the column with the aspect kept, so they scale instead of
+   hanging off the page. 88% is the share whose rotated box just fits:
+   w*cos28 + h*sin28 <= column, and h = 0.538w, so 1.135w <= column. 69% is the same
+   share scaled by 410/520, which keeps the two ellipses in their original proportion. */
+.orbit-one { width: min(520px, 88%); aspect-ratio: 520 / 280; height: auto; }
+.orbit-two { width: min(410px, 69%); aspect-ratio: 410 / 220; height: auto; border-color: rgba(233,75,45,.18); }
 .status-card { position: absolute; z-index: 4; background: var(--paper); border: 2px solid var(--ink); box-shadow: 5px 5px 0 var(--ink); padding: 12px 16px; display: flex; align-items: center; gap: 10px; font-size: 12px; text-transform: uppercase; font-weight: 700; letter-spacing: .05em; }
 .status-card b { font: 800 28px/1 "Barlow Condensed"; color: var(--red); }
 .status-card i { width: 10px; height: 10px; border-radius: 50%; background: #45a96f; box-shadow: 0 0 0 5px rgba(69,169,111,.15); }
@@ -113,7 +124,7 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
   .nav{grid-template-columns:1fr auto}.nav nav{display:none}.hero{grid-template-columns:1fr;padding-top:60px}.hero-art{min-height:500px}.split,.product-showcase,.cta{grid-template-columns:1fr}.loop{grid-template-columns:1fr 1fr}.loop-card:nth-child(2){border-right:0}.loop-card:nth-child(-n+2){border-bottom:1px solid var(--line)}.roles{grid-template-columns:1fr}.integration-grid{grid-template-columns:1fr 1fr}.integration-grid div:nth-child(3n){border-right:1px solid var(--line)}.integration-grid div:nth-child(2n){border-right:0}.integration-grid div:nth-last-child(-n+3){border-bottom:1px solid var(--line)}.integration-grid div:nth-last-child(-n+2){border-bottom:0}.footer{grid-template-columns:1fr;text-align:center;gap:10px;padding-block:30px}.footer p:last-child{text-align:center}
 }
 @media (max-width: 600px){
-  .shell{width:min(100% - 24px,1180px)}.nav>.button{display:none}.nav{grid-template-columns:1fr}.hero{min-height:auto;padding-block:55px}.hero-art{min-height:380px}.hero-art img{width:115%}.status-card{transform:scale(.85)}.status-one{left:0}.status-two{right:-5%;top:10%}h1{font-size:58px}.lede{font-size:17px}.section{padding-block:90px}.split{gap:25px}.section-copy{padding-top:0;font-size:18px}.loop{grid-template-columns:1fr}.loop-card{border-right:0;border-bottom:1px solid var(--line)!important}.loop-card:last-child{border-bottom:0!important}.world{height:430px}.tile{transform:scale(.78)}.tile-a{left:0}.tile-b{left:28%}.tile-c{right:-4%}.tile-d{right:3%}.mission-card{width:230px}.integration-grid{grid-template-columns:1fr}.integration-grid div{border-right:0!important;border-bottom:1px solid var(--line)!important}.integration-grid div:last-child{border-bottom:0!important}.cta{padding:38px 24px}.signup{grid-template-columns:1fr}.footer{margin-top:40px}
+  .shell{width:min(100% - 24px,1180px)}.nav>.button{display:none}.nav{grid-template-columns:1fr}.hero{min-height:auto;padding-block:55px}.hero-art{min-height:380px}.status-card{transform:scale(.85)}.status-one{left:0}.status-two{right:max(-5%, -10px)/* the overhang is deliberate, but -5% is 29px against a 576px shell and put the card off the page near 600px; capped just inside the 12px gutter */;top:10%}h1{font-size:58px}.lede{font-size:17px}.section{padding-block:90px}.split{gap:25px}.section-copy{padding-top:0;font-size:18px}.loop{grid-template-columns:1fr}.loop-card{border-right:0;border-bottom:1px solid var(--line)!important}.loop-card:last-child{border-bottom:0!important}.world{height:430px}.tile{transform:scale(.78)}.tile-a{left:0}.tile-b{left:28%}.tile-c{right:-4%}.tile-d{right:3%}.mission-card{width:230px}.integration-grid{grid-template-columns:1fr}.integration-grid div{border-right:0!important;border-bottom:1px solid var(--line)!important}.integration-grid div:last-child{border-bottom:0!important}.cta{padding:38px 24px}.signup{grid-template-columns:1fr}.footer{margin-top:40px}
 }
 
 
@@ -168,10 +179,16 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
 .cycle-beat { position: absolute; background: rgba(16,37,49,.82); border-radius: 12px; padding: 20px 26px; max-width: min(540px, 78%); backdrop-filter: blur(4px); }
 .cycle-beat h3 { margin: 0 0 10px; font-size: clamp(26px, 3.2vw, 40px); line-height: 1.05; letter-spacing: -.01em; color: #fffaf0; text-wrap: balance; }
 .cycle-beat .reply { margin: 0; color: rgba(255,250,240,.88); }
-.beat-a { left: 26px; bottom: 30px; opacity: 0; animation: beatA 12s ease-in-out infinite; }
-.beat-b { right: 26px; bottom: 30px; opacity: 0; animation: beatB 12s ease-in-out infinite; }
-@keyframes beatA { 0% { opacity: 0; transform: translateX(-46px); } 6%, 40% { opacity: 1; transform: none; } 48%, 100% { opacity: 0; transform: translateX(-46px); } }
-@keyframes beatB { 0%, 50% { opacity: 0; transform: translateX(46px); } 56%, 90% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; transform: translateX(46px); } }
+/* --slide is the entrance throw. It lives on the element rather than inside the
+   keyframes so a breakpoint can shorten it: at <=900px the beats sit 10px from the
+   edge, and a 46px throw parked them off the page for the half of the cycle they are
+   hidden, dragging their h3 and .reply with them. Redefining @keyframes inside the
+   media query does NOT work here -- keyframes resolve by document order, and these
+   are defined further down the file than the breakpoints are. */
+.beat-a { left: 26px; bottom: 30px; opacity: 0; --slide: -46px; animation: beatA 12s ease-in-out infinite; }
+.beat-b { right: 26px; bottom: 30px; opacity: 0; --slide: 46px; animation: beatB 12s ease-in-out infinite; }
+@keyframes beatA { 0% { opacity: 0; transform: translateX(var(--slide)); } 6%, 40% { opacity: 1; transform: none; } 48%, 100% { opacity: 0; transform: translateX(var(--slide)); } }
+@keyframes beatB { 0%, 50% { opacity: 0; transform: translateX(var(--slide)); } 56%, 90% { opacity: 1; transform: none; } 98%, 100% { opacity: 0; transform: translateX(var(--slide)); } }
 @media (prefers-reduced-motion: reduce) {
   .cycle-art .img-a, .cycle-art .img-b, .beat-a, .beat-b { animation: none; }
   .cycle-art .img-b { opacity: .9; }
@@ -181,8 +198,8 @@ h2 { font-size: clamp(54px, 6vw, 86px); line-height: .92; text-transform: upperc
   .duo-cycle { height: clamp(400px, 118vw, 560px); }
   .cycle-art img { width: 86%; height: 58%; }
   .cycle-beat { padding: 14px 18px; max-width: 88%; }
-  .beat-a { left: 10px; bottom: 14px; }
-  .beat-b { right: 10px; bottom: 14px; }
+  .beat-a { left: 10px; bottom: 14px; --slide: -14px; }
+  .beat-b { right: 10px; bottom: 14px; --slide: 14px; }
 }
 /* Pricing must stack on small screens; an inline column count overrides media rules. */
 .pricing-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
