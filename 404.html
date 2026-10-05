@@ -20,8 +20,11 @@
      rel=canonical points search engines at dungen.ai. noindex keeps this stub itself
      out of results; the canonical is what passes the signal along.
 
-     404.html in this repo is a byte-identical copy. Pages serves it for every path
-     that does not exist, which is what carries /anything over to dungen.ai/anything.
+     404.html in this repo is this same page with ONE deliberate difference: it drops the
+     path and keeps only the hash. Pages serves 404.html for every path that does not exist
+     HERE -- and a path that never existed on pizzafleet.app almost certainly does not exist
+     on dungen.ai either, so carrying it over would turn one 404 into another. Sending those
+     visitors to the home page lands them somewhere real.
      CNAME is untouched: pizzafleet.app must keep resolving here for any of this to run. -->
 
 <link rel="canonical" href="https://dungen.ai/" />
@@ -32,8 +35,8 @@
     // Never redirect to ourselves: if this file is ever served from dungen.ai
     // (copied, proxied, previewed) the replace below would loop forever.
     if (location.hostname === 'dungen.ai') return;
-    var path = location.pathname.replace(/\/index\.html$/, '/');
-    location.replace('https://dungen.ai' + path + location.search + location.hash);
+    // Home page plus the hash only -- see the note above on why the path is dropped here.
+    location.replace('https://dungen.ai/' + location.hash);
   })();
 </script>
 <style>
